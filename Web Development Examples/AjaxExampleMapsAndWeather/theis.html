@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+    <div id="result">
+
+    </div>
+    <form>
+        <input id="txtCity" type="text" />
+        <button id="btnGetWeather" type="button">Find</button>
+    </form>
+
+    <script>
+        // $('#btnGetWeather').click(function (evt) {
+        //     evt.preventDefault();
+        //     var city = $('#txtCity').val();
+        //     var resultDiv = $('#result');
+        //     $.ajax({
+        //         type: 'GET',
+        //         dataType: 'json',
+        //         success: function (data, textStatus, xhr) {
+        //             console.log(data);
+
+        //             for (var i = 0; i < data.list.length; i++) {
+
+        //                 resultDiv.append("Time: " + data.list[i].dt_txt + " - " + data.list[i].main.temp + "<br/>");
+        //             }
+        //         },
+        //         error: function (xhr,text,exception) {
+        //             console.log(text);
+        //         },
+        //         url: 'http://api.openweathermap.org/data/2.5/forecast?q='+city+'&units=metric'
+        //     });
+
+        // });
+        $('#btnGetWeather').click(function (evt) {
+            evt.preventDefault();
+            $.getJSON('http://api.openweathermap.org/data/2.5/forecast?q='+$('#txtCity').val()+'&units=metric',function(data){
+                console.log(data);
+                var html = data.list.map(time_list);
+                $('#result').html(html);
+            });
+        });
+
+        var time_list = function(data_element){
+            return "Time: " + data_element.dt_txt + " - " + data_element.main.temp + "<br/>";
+        };
+
+
+    </script>
+
+</body>
+</html>

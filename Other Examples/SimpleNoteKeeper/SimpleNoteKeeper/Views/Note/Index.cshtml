@@ -1,0 +1,34 @@
+﻿@model List<SimpleNoteKeeper.Models.Note>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@Html.ActionLink("Create Note","Create") <br/>
+<div id="data">
+    @foreach (var note in Model)
+    {
+        <p>@note.NoteText <text>-</text> category: @note.Category.Name <text>-</text> @Html.ActionLink("Delete", "Delete", new { id = note.NoteId }) @Html.ActionLink("Edit", "Edit", new { id = note.NoteId })</p>
+
+    }
+</div>
+<form>
+    <input name="txtNote" id="txtNote" type="text" class="form-control" placeholder="Note text" />
+    <input name="txtCategoryId" id="txtCategoryId" type="text" class="form-control" placeholder="Category Id" />
+    <button id="btnCreateNote" class="btn btn-default">Save Note</button>
+</form>
+
+@section scripts{
+    <script>
+        $("#btnCreateNote").click(function (evt) {
+            evt.preventDefault();
+            var noteTxt = $('#txtNote').val();
+            var catText = $('#txtCategoryId').val();
+
+            $.post('/Note/CreateAjax', { txtNote: noteTxt, txtCategoryId: catText }, function (data) { $('#data').append(data).fadeIn(); }, 'html');
+        });
+
+        
+    </script>
+
+}

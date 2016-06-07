@@ -1,0 +1,28 @@
+﻿<Window x:Class="CarBooking.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Height="20" Width="Auto" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Actions">
+                <MenuItem Header="Show Units" Click="ShowUnits_Click"/>
+                <MenuItem Header="Show Customers"/>
+                <MenuItem Header="Show Bookings"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" x:Name="stackPanel2" Height="Auto" Width="Auto" Orientation="Horizontal">
+            
+            <StackPanel x:Name="stackPanel" Height="Auto" Width="Auto" Orientation="Horizontal">
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    
+</Window>

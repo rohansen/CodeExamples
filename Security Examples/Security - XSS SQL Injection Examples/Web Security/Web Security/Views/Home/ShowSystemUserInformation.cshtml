@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Web_Security.Models.SystemUser>
+@{
+    ViewBag.Title = "ShowUserInformation";
+}
+
+<h2>ShowUserInformation</h2>
+<table class="table table-striped">
+
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.Raw(item.UserName)</td>
+                <td>@item.Password</td>
+                <td>@item.Role</td>
+            </tr>
+
+
+        }
+    </tbody>
+</table>
+
+

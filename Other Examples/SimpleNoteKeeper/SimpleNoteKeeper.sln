@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleNoteKeeper", "SimpleNoteKeeper\SimpleNoteKeeper.csproj", "{0FE20E4C-B6E2-4F6D-A763-FF3B143CCDBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FE20E4C-B6E2-4F6D-A763-FF3B143CCDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE20E4C-B6E2-4F6D-A763-FF3B143CCDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE20E4C-B6E2-4F6D-A763-FF3B143CCDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE20E4C-B6E2-4F6D-A763-FF3B143CCDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+﻿@model SimpleNoteKeeper.Models.Note
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Are you sure you want to delete @Model.NoteText</h2>
+
+@using (Html.BeginForm("DeleteConfirmation", "Note", FormMethod.Post))
+{
+    @Html.HiddenFor(x=>x.NoteId)
+    <button type="submit">OK - Delete</button>
+}
+

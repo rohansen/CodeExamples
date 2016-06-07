@@ -1,0 +1,13 @@
+﻿@model SimpleNoteKeeper.Models.Note
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm("Create","Note",FormMethod.Post))
+{
+    @Html.TextBoxFor(x => x.NoteText, new { @placeholder="Insert note text", @class="mystyling" })
+    @Html.TextBoxFor(x=>x.CategoryId)
+    <button type="submit">Save</button>
+}
+

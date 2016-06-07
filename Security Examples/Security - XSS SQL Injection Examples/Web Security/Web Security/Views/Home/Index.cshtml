@@ -1,0 +1,30 @@
+﻿@model List<Web_Security.Models.SystemUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h3>Nuværende Brugere</h3>
+@foreach (var item in Model)
+{
+    <strong>@Html.Raw(item.UserName) </strong>
+    @:this user is
+    <strong>
+        @item.Role
+    </strong>
+        <br />
+        }
+        @Html.ActionLink("Opret ny bruger! XSS", "Create") <br />
+        @Html.ActionLink("Opret ny bruger! SQLInject", "Create2") <br />
+        @Html.ActionLink("MVC Specific - Overposting Edit (Bruger 2(hardcoded) )", "OverPostingEdit", new { id = 43 }) <br />
+        <hr />
+
+        <h3>(Admin)</h3>
+        <p> Vis alle brugeroplysninger i systemet - Skriv dine adminoplysninger -- eller hack med: ' OR 1=1--</p>
+        @using (Html.BeginForm("ShowSystemUserInformation", "Home", FormMethod.Post))
+        {
+            <input type="text" name="username" />
+            <input type="text" name="password" />
+            <button type="submit">Søg</button>
+        }
+        <h1>@TempData["Message"] </h1>
