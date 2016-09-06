@@ -1,5 +1,6 @@
 ﻿using ServerApplication.Models;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,12 +24,15 @@ namespace ServerApplication
         private const int SERVER_PORT = 5559;
         private static IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, SERVER_PORT);
         private static TcpListener server = new TcpListener(endpoint);
-        private static Socket connection = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        private static TcpClient client;
+        private static ConcurrentBag<TcpClient> clients;
         static void Main(string[] args)
         {
+            clients = new ConcurrentBag<TcpClient>();
+            //StartAcceptingClient(server);
+            //Client Listener
+            Thread clientListener = new Thread(()=>StartAcceptingClient(server));
+            clientListener.Start();
 
-            StartAcceptingClient(server);
             Console.WriteLine("Server started...");
             Console.WriteLine("Type something..");
             do
@@ -38,43 +42,52 @@ namespace ServerApplication
                 switch (inputString)
                 {
                     default:
-                        SendMessage(inputString);
+                        foreach (var client in clients)
+                        {
+                            SendMessage(inputString,client);
+                        }
+                        
                         break;
                 }
             } while (true);
         }
-        public static void SendMessage(string message)
+        public static void SendMessage(string message, TcpClient currentClient)
         {
-            NetworkStream nws = client.GetStream();
+            NetworkStream nws = currentClient.GetStream();
             byte[] msg = Encoding.UTF8.GetBytes(message);
             nws.Write(msg, 0, msg.Length);
 
         }
         public static void StartAcceptingClient(TcpListener srv)
         {
-            srv.Start();
-            client = srv.AcceptTcpClient(); //Blocking call
-            Thread t = new Thread(new ThreadStart(HandleConnection)); //constantly read the stream; blocking so in a thread
-            t.Start();
+            while (true)
+            {
+                srv.Start();
+                var currentClient = srv.AcceptTcpClient();
+                clients.Add(currentClient); //Blocking call
+                Thread t = new Thread(() => HandleConnection(currentClient)); //constantly read the stream; blocking so in a thread
+                t.Start(); 
+            }
         }
-        private static void HandleConnection()
+        private static void HandleConnection(TcpClient currentClient)
         {
 
-            while (client.Connected)
+            while (true)
             {
                 try
                 {
-                    NetworkStream nws = client.GetStream();
-                    byte[] readBuffer = new byte[client.ReceiveBufferSize];
-                    byte[] sendBuffer = new byte[client.SendBufferSize];
-                    string recievedData = "";
+                    NetworkStream nws = currentClient.GetStream();
+                    byte[] readBuffer = new byte[currentClient.ReceiveBufferSize];
                     int streamSize = -1;
                     while ((streamSize = nws.Read(readBuffer, 0, readBuffer.Length)) != 0)
                     {
-                        recievedData = Encoding.UTF8.GetString(readBuffer, 0, streamSize);
+                        string recievedData = Encoding.UTF8.GetString(readBuffer, 0, streamSize);
                         Console.WriteLine("Message Recieved: " + recievedData);
-                        string commandValue = ParseCommand(recievedData);
-                        SendMessage(commandValue);
+                        string commandValue = ParseCommand(recievedData,currentClient);
+                        SendMessage(commandValue, currentClient);
+
+                        //If you want to send out the recieved message to all connected clients, 
+                        //Loop over the "clients" collection and do a SendMessage(msg, client)
 
                     }
                 }
@@ -85,7 +98,7 @@ namespace ServerApplication
             }
         }
 
-        private static string ParseCommand(string cmd)
+        private static string ParseCommand(string cmd,TcpClient currentClient)
         {
             //command pattern: command0 = what to do --> command1: arguments for first command
             string[] commands = cmd.Split(' ');
@@ -110,7 +123,7 @@ namespace ServerApplication
                         return GetDirectionsFor(commands[1], commands[2]);
                         break;
                     case "person":
-                        CreatePerson(commands[1], commands[2], commands[3]);
+                        CreatePerson(commands[1], commands[2], commands[3],currentClient);
                         return "Added";
                         break;
                     default:
@@ -123,10 +136,10 @@ namespace ServerApplication
 
         }
 
-        public static void CreatePerson(string firstname, string lastname, string birthday)
+        public static void CreatePerson(string firstname, string lastname, string birthday, TcpClient currentClient)
         {
             Person p = new Person { FirstName = firstname, LastName = lastname, Birthday = DateTime.Parse(birthday) };
-            SendMessage(JsonConvert.SerializeObject(p));
+            SendMessage(JsonConvert.SerializeObject(p),currentClient);
         }
         public static string MoveCursor()
         {

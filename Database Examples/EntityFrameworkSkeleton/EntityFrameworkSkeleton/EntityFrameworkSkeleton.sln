@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{3D788B43-D6FF-4773-B7FA-8E51109D67DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{2157DD4E-44D6-4B6D-BDF9-E1B85F10B0DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrinkGui", "DrinkGui\DrinkGui.csproj", "{0AC8CEC2-E4C9-4B4C-8754-5745578DAA21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D788B43-D6FF-4773-B7FA-8E51109D67DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D788B43-D6FF-4773-B7FA-8E51109D67DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D788B43-D6FF-4773-B7FA-8E51109D67DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D788B43-D6FF-4773-B7FA-8E51109D67DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2157DD4E-44D6-4B6D-BDF9-E1B85F10B0DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2157DD4E-44D6-4B6D-BDF9-E1B85F10B0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2157DD4E-44D6-4B6D-BDF9-E1B85F10B0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2157DD4E-44D6-4B6D-BDF9-E1B85F10B0DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC8CEC2-E4C9-4B4C-8754-5745578DAA21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC8CEC2-E4C9-4B4C-8754-5745578DAA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC8CEC2-E4C9-4B4C-8754-5745578DAA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC8CEC2-E4C9-4B4C-8754-5745578DAA21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

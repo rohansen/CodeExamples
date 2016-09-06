@@ -1,0 +1,132 @@
+﻿--Danske Bank Script
+
+
+USE [DanskeBank]
+GO
+/****** Object:  Table [dbo].[Account]    Script Date: 15-11-2015 18:45:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Account](
+	[AccountId] [int] IDENTITY(1,1) NOT NULL,
+	[Balance] [int] NOT NULL,
+	[CustomerId] [int] NOT NULL,
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[AccountId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 15-11-2015 18:45:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[CustomerId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
+(
+	[CustomerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[Account] ON 
+
+GO
+INSERT [dbo].[Account] ([AccountId], [Balance], [CustomerId]) VALUES (1, 10000, 1)
+GO
+INSERT [dbo].[Account] ([AccountId], [Balance], [CustomerId]) VALUES (2, 1000000, 2)
+GO
+SET IDENTITY_INSERT [dbo].[Account] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Customer] ON 
+
+GO
+INSERT [dbo].[Customer] ([CustomerId], [Name]) VALUES (1, N'Ronni Hansen')
+GO
+INSERT [dbo].[Customer] ([CustomerId], [Name]) VALUES (2, N'Bill Gates')
+GO
+SET IDENTITY_INSERT [dbo].[Customer] OFF
+GO
+ALTER TABLE [dbo].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_Customer] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([CustomerId])
+GO
+ALTER TABLE [dbo].[Account] CHECK CONSTRAINT [FK_Account_Customer]
+GO
+USE [master]
+GO
+ALTER DATABASE [DanskeBank] SET  READ_WRITE 
+GO
+
+
+
+
+
+
+
+SBanking Script
+
+USE [SBanking]
+GO
+/****** Object:  Table [dbo].[Account]    Script Date: 15-11-2015 18:45:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Account](
+	[AccountId] [int] IDENTITY(1,1) NOT NULL,
+	[Balance] [int] NOT NULL,
+	[CustomerId] [int] NOT NULL,
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[AccountId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 15-11-2015 18:45:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[CustomerId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
+(
+	[CustomerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[Account] ON 
+
+GO
+INSERT [dbo].[Account] ([AccountId], [Balance], [CustomerId]) VALUES (1, 10000, 1)
+GO
+INSERT [dbo].[Account] ([AccountId], [Balance], [CustomerId]) VALUES (2, 1000000, 2)
+GO
+SET IDENTITY_INSERT [dbo].[Account] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Customer] ON 
+
+GO
+INSERT [dbo].[Customer] ([CustomerId], [Name]) VALUES (1, N'Ronni Hansen')
+GO
+INSERT [dbo].[Customer] ([CustomerId], [Name]) VALUES (2, N'Bill Gates')
+GO
+SET IDENTITY_INSERT [dbo].[Customer] OFF
+GO
+ALTER TABLE [dbo].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_Customer] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([CustomerId])
+GO
+ALTER TABLE [dbo].[Account] CHECK CONSTRAINT [FK_Account_Customer]
+GO
+USE [master]
+GO
+ALTER DATABASE [SBanking] SET  READ_WRITE 
+GO

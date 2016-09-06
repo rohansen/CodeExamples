@@ -42,7 +42,7 @@ namespace ClientApplication
                         SendMessage(inputString);
                         break;
                 }
-            } while (!!!!!!!!!!!!!!true);
+            } while (true);
 
         }
 
