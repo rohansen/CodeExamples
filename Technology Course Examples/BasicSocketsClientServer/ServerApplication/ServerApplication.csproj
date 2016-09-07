@@ -55,10 +55,12 @@
     <Compile Include="Models\MapsAPI\Leg.cs" />
     <Compile Include="Models\MapsAPI\Routes.cs" />
     <Compile Include="Models\MapsAPI\Step.cs" />
+    <Compile Include="Models\MyTCPClient.cs" />
     <Compile Include="Models\OpenWeather.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Sys.cs" />
     <Compile Include="Models\Weather.cs" />
+    <Compile Include="MyTcpListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
