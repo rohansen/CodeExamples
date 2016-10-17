@@ -21,7 +21,7 @@ namespace ServerApplication
 {
     class Program
     {
-        private const int SERVER_PORT = 5559;
+        private const int SERVER_PORT = 8888;
         private static IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, SERVER_PORT);
         private static TcpListener server = new TcpListener(endpoint);
         private static ConcurrentBag<TcpClient> clients;

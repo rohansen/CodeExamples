@@ -11,8 +11,8 @@ namespace ClientApplication
 {
     class Program
     {
-        private const int SERVER_PORT = 5559;
-        private static IPEndPoint remoteEndpoint = new IPEndPoint(new IPAddress(new byte[]{192,168,153,1}), SERVER_PORT);
+        private const int SERVER_PORT = 8888;
+        private static IPEndPoint remoteEndpoint = new IPEndPoint(new IPAddress(new byte[]{192,168,1,34}), SERVER_PORT);
         private static Socket connection = new Socket(SocketType.Stream,ProtocolType.Tcp);
         static void Main(string[] args)
         {
