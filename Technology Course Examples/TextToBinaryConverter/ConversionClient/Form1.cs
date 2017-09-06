@@ -23,7 +23,8 @@ namespace ConversionClient
             {
                 textBox1.Text = textBox1.Text.Replace("\n", string.Empty);
                 textBox1.Text = textBox1.Text.Replace("\r", string.Empty);
-
+                //with extension methods
+                // var text = textBox1.Text.FromBinary();
                 var text = BinaryConverter.FromBinary(textBox1.Text);
                 textBox2.Text = text;
             }
@@ -37,6 +38,8 @@ namespace ConversionClient
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //with extension methods
+            // var binaryStr = textBox1.Text.FromBinary();
             var binaryStr = BinaryConverter.ToBinary(textBox1.Text);
             textBox2.Text = binaryStr;
         }
