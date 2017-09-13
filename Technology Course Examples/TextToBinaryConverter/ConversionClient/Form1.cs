@@ -42,6 +42,7 @@ namespace ConversionClient
             // var binaryStr = textBox1.Text.FromBinary();
             var binaryStr = BinaryConverter.ToBinary(textBox1.Text);
             textBox2.Text = binaryStr;
+            
         }
     }
 }

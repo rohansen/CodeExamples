@@ -10,8 +10,8 @@ namespace ConversionClient
     {
         public static string ToBinary(string text)
         {
-            char[] textBytes = text.ToCharArray();
-            byte[] bytes = Encoding.ASCII.GetBytes(textBytes);
+           
+            byte[] bytes = Encoding.ASCII.GetBytes(text);
             string binaryString = "";
             foreach (var charByte in bytes)
             {
@@ -22,7 +22,7 @@ namespace ConversionClient
         }
 
         public static string FromBinary(string binaryText)
-        {
+        {            
             List<char> binaryBuilder = new List<char>(binaryText.Length/8);
             for (int i = 0; i < binaryText.Length ; i++)
             {

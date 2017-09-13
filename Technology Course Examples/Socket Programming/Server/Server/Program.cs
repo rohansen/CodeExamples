@@ -11,14 +11,14 @@ namespace Server
 {
     class Program
     {
-        public static List<User> OnlineUsers { get; set; }
+      
         private static TcpListener listener;
         static void Main(string[] args)
         {
             AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
-            OnlineUsers = new List<User>();
+           
             Start();
         }
 
