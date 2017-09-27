@@ -11,7 +11,6 @@ namespace NaiveSocketImplementation
 {
     class Program
     {
-
         private const short PORT = 6568;
         private static TcpListener listener;
         static void Main(string[] args)

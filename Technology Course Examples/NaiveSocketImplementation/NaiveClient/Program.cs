@@ -15,7 +15,6 @@ namespace NaiveClient
         private const short PORT = 6568;
         static void Main(string[] args)
         {
-
             Connect();
             while (true)
             {
