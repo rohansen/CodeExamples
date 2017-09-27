@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RoomBookingService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/RoomBooking.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRoomBookingService_Book_InputMessage">
+    <wsdl:part name="parameters" element="tns:Book" />
+  </wsdl:message>
+  <wsdl:message name="IRoomBookingService_Book_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BookResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRoomBookingService_Book_ArgumentExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:ArgumentException" />
+  </wsdl:message>
+  <wsdl:portType name="IRoomBookingService">
+    <wsdl:operation name="Book">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomBookingService/Book" message="tns:IRoomBookingService_Book_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomBookingService/BookResponse" message="tns:IRoomBookingService_Book_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IRoomBookingService/BookArgumentExceptionFault" name="ArgumentExceptionFault" message="tns:IRoomBookingService_Book_ArgumentExceptionFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRoomBookingService" type="tns:IRoomBookingService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Book">
+      <soap:operation soapAction="http://tempuri.org/IRoomBookingService/Book" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ArgumentExceptionFault">
+        <soap:fault use="literal" name="ArgumentExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RoomBookingService">
+    <wsdl:port name="BasicHttpBinding_IRoomBookingService" binding="tns:BasicHttpBinding_IRoomBookingService">
+      <soap:address location="http://localhost:8733/RoomBookingService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
