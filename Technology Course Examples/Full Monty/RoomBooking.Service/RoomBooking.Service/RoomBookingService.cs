@@ -17,9 +17,29 @@ namespace RoomBooking.Service
         {
             bookingCtrl = new BookingController();
         }
-        public void Book(Booking booking)
+        public void Create(Booking booking)
         {
             bookingCtrl.Create(booking);
+        }
+
+        public void Delete(int id)
+        {
+            bookingCtrl.Delete(id);
+        }
+
+        public Booking Get(int id)
+        {
+            return bookingCtrl.Get(id);
+        }
+
+        public IEnumerable<Booking> GetAll()
+        {
+            return bookingCtrl.GetAll();
+        }
+
+        public void Update(Booking booking)
+        {
+            bookingCtrl.Update(booking);
         }
     }
 }

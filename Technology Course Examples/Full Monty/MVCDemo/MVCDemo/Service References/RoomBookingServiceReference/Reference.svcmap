@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3389a672-99e3-4a36-b3e1-22dfcd46e0fd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/RoomBookingService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="00c03ded-4c91-46b1-9404-b671b6e2639b" SourceId="1" SourceUrl="http://localhost:8733/RoomBookingService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c8445706-2142-4e35-ac1e-c124f889dfb9" SourceId="1" SourceUrl="http://localhost:8733/RoomBookingService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="44703406-8559-49aa-99ea-12437033b167" SourceId="1" SourceUrl="http://localhost:8733/RoomBookingService/mex" />
+    <MetadataFile FileName="RoomBooking.Models.xsd" MetadataType="Schema" ID="d9e03790-050b-49fa-b73c-09692c605703" SourceId="1" SourceUrl="http://localhost:8733/RoomBookingService/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="0ee8271b-a26d-4f2b-897a-a0b4a2c45a05" SourceId="1" SourceUrl="http://localhost:8733/RoomBookingService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

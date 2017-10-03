@@ -27,22 +27,22 @@ namespace RoomBooking.BLL
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            dbCrud.Delete(id);
         }
 
         public Booking Get(int id)
         {
-            throw new NotImplementedException();
+            return dbCrud.Get(id);
         }
 
         public IEnumerable<Booking> GetAll()
         {
-            throw new NotImplementedException();
+            return dbCrud.GetAll();
         }
 
         public void Update(Booking entity)
         {
-            throw new NotImplementedException();
+            dbCrud.Update(entity);
         }
     }
 }

@@ -14,7 +14,15 @@ namespace RoomBooking.Service
     {
         [OperationContract]
         [FaultContract(typeof(ArgumentException))]
-        void Book(Booking booking);
+        void Create(Booking booking);
+        [OperationContract]
+        void Update(Booking booking);
+        [OperationContract]
+        void Delete(int id);
+        [OperationContract]
+        IEnumerable<Booking> GetAll();
+        [OperationContract]
+        Booking Get(int id);
     }
-    
+
 }
