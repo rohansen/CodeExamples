@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HashingExample.Properties
+namespace UserDrivenApplication.Properties
 {
 
 
