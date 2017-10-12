@@ -103,6 +103,31 @@ namespace RoomBooking.DbLayer
             }
             return booking;
         }
+        public bool Login(string username, string password)
+        {
+            bool isUserValidated = false;
+            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * Users WHERE username=@username AND password=@password";
+                    cmd.Parameters.AddWithValue("username", username);
+                    cmd.Parameters.AddWithValue("password", password);
+                    var reader = cmd.ExecuteReader();
+
+                    if(reader.HasRows)
+                    {
+                        //If the reader has a row, a match must have been found
+                        isUserValidated = true;
+                    }
+                }
+
+            }
+            return isUserValidated;
+        }
+
 
         public IEnumerable<Booking> GetAll()
         {

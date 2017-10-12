@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SqlInjectionExample.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p class="bg-danger">@TempData["Message"]</p>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+                <a class="btn btn-default btn-sm" href="@Url.Action("AddPoint",new { userid=@item.User.Id })">Give Point</a>
+            <h3>
+                @item.User.FirstName @item.User.LastName
+                <small>Pts: @item.User.Points </small>
+            </h3>
+            <p>
+                @Html.Raw(item.Content) <br />
+            </p>
+        </div>
+    </div>
+   
+    <hr/>
+}

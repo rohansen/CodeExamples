@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNet.Identity
+@{ 
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("EZ Password Storage", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Post wall", "Index", "Posts")</li>
+                    <li>@Html.ActionLink("UserManagement", "Index", "Users")</li>
+                    <li>@Html.ActionLink("PasswordManager", "Index", "PasswordEntries")</li>
+                </ul>
+              
+                
+                        @if (User.Identity.IsAuthenticated)
+                        {    <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-text">Welcome @User.Identity.Name (@(User.IsInRole("Admin") ? "Admin" : "nonadmin"))</li>
+                <li>@Html.ActionLink("Edit", "Edit", "Users", new { id=User.Identity.GetUserId() },null)</li>
+                    <li>@Html.ActionLink("Log out", "Logout", "Authentication", new { returnUrl = "/Home/Index" }, null)</li>
+                                 
+                </ul>
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("Login", "Authentication", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
+                            {
+                                <input class="form-control" type="text" placeholder="Email" name="Email">
+                                <input class="form-control" type="password" placeholder="Password" name="Password">
+                                <input type="hidden" name="returnUrl" value="/home/index">
+                                <button type="submit" class="btn btn-default">Login</button>
+                            }
+                         
+                        }
+
+                
+
+            </div>
+         
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
