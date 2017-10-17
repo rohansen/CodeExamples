@@ -46,7 +46,7 @@
     <Compile Include="CaesarCypher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TranspositionCypher.cs" />
+    <Compile Include="Vinegere.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

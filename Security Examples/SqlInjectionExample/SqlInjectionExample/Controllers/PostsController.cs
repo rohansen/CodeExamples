@@ -23,7 +23,9 @@ namespace SqlInjectionExample.Controllers
         {
             return View();
         }
+        //Used for CSRF AND  XSS
         [HttpGet]
+        
         public ActionResult AddPoint(string userid)
         {
             var myId = User.Identity.GetUserId();
@@ -39,6 +41,7 @@ namespace SqlInjectionExample.Controllers
             }
             return RedirectToAction("Index");
         }
+        //Used for CSRF AND  XSS
 
         [Authorize]
         [HttpPost]

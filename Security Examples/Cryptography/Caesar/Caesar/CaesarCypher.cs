@@ -9,7 +9,7 @@ namespace Caesar
 {
     public class CaesarCypher
     {
-        private static char[] alphabeth = "abcdefghijklmnopqrstuvxyzwæøå".ToCharArray();
+        private static char[] alphabeth = "abcdefghijklmnopqrstuvxyzw".ToCharArray();
         public string Encrypt(string s)//This doesnt use a static alphabeth, relies on the charset
         {
             var input = s.ToCharArray();
@@ -36,11 +36,7 @@ namespace Caesar
             {
                 var remainder = (Array.IndexOf(alphabeth, input[i]) + 3) % alphabeth.Length;
                 Debug.WriteLine(remainder);
-                if (remainder < 0)
-                {
-                    remainder = remainder + alphabeth.Length;
-                }
-                
+               
                 input[i] = alphabeth[remainder];
 
             }
@@ -55,7 +51,7 @@ namespace Caesar
                 var index = (Array.IndexOf(alphabeth, input[i]) - 3) % alphabeth.Length;
                 if (index < 0)
                 {
-                    index = alphabeth.Length+index; //Hvis indexet til vores alfabeth ender i negativ, plusser vi det negative tal til arrayets længde(vi trækker det altså fra, og starter fra slutningen igen)
+                    index = alphabeth.Length+index; //If the index for our alfabeth ends as a negtive, we plus the negative number to the arrays length(we deduct it, and get to the end of the array (eg. 0(a)+(-3) = 24(y)))
                 }
                 input[i] = alphabeth[index];
                 

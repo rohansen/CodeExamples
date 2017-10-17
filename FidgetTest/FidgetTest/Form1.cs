@@ -42,7 +42,7 @@ namespace FidgetTest
 
         public void WriteNewTag(string rfidTag)
         {
-            rfid.Write("EN BESKED DER SKAL LIGGE PÅ RFID", RFIDProtocol.PhidgetTAG, false);
+            rfid.Write("EN BESKED DER SKAL LIGGE PÅ RFID", RFIDProtocol., false);
         }
 
         private void rfid_TagLost(object sender, RFIDTagLostEventArgs e)
@@ -51,26 +51,18 @@ namespace FidgetTest
         }
         private void rfid_Tag(object sender, RFIDTagEventArgs e)
         {
-
-
+            
             RFID rf = (RFID)sender;
             rf.Channel = 2;
             rf.Open();
-
-
-
-            SendEmail();
+            
+           // SendEmail();
             label2.Text = "Amount sent: " + amountSent;
             dig.BeginSetState(true, TurnOn, null);
             this.BackColor = Color.Green;
-            //Process.Start("chrome", "http://www.google.dk");
-            
+            Process.Start("chrome", "http://www.google.dk");
             dig.BeginSetState(false, TurnOff, null);
            // this.BackColor = Color.Gray;
-
-
-            
-
         }
 
         public bool Login(string username,string password)

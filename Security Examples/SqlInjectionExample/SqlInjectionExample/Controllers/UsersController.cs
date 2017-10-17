@@ -21,7 +21,7 @@ namespace SqlInjectionExample.Controllers
             return View(db.Users.ToList());
         }
 
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         // GET: Users/Details/5
         public ActionResult Details(string id)
         {
@@ -99,7 +99,6 @@ namespace SqlInjectionExample.Controllers
             {
                 db.Entry(user).Property(x => x.Role).IsModified = false;
             }
-      
            
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -123,7 +122,7 @@ namespace SqlInjectionExample.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             User user = db.Users.Find(id);
             db.Users.Remove(user);

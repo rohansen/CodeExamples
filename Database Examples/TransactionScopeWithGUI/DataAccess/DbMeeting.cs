@@ -28,7 +28,7 @@ namespace DataAccess
             //Go to management studio; try and insert a row in the RANGE of a allready existing booking.
             //
             TransactionOptions to = new TransactionOptions { IsolationLevel = IsolationLevel.Serializable };
-            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew,to))
             {
                 connection.Open();
                 //Check for available timeslot
@@ -45,7 +45,6 @@ namespace DataAccess
                         throw new Exception("Your booking overlaps other bookings.");
                         
                     }
-               
                 }
                 //Book
                 using (SqlCommand cmd = connection.CreateCommand())
