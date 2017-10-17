@@ -10,8 +10,8 @@ namespace Caesar
     {
         static void Main(string[] args)
         {
-            Vinegere v = new Vinegere();
-            v.PrintMatrix();
+ 
+  
             while (true)
             {
                 CaesarCypher cc = new CaesarCypher();

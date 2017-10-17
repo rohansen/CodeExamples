@@ -25,7 +25,7 @@ namespace SqlInjectionExample.Controllers
         }
         //Used for CSRF AND  XSS
         [HttpGet]
-        
+        [Authorize]
         public ActionResult AddPoint(string userid)
         {
             var myId = User.Identity.GetUserId();

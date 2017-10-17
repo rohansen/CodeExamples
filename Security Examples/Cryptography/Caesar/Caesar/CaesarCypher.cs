@@ -58,7 +58,6 @@ namespace Caesar
             }
             return new string(input);
         }
-
         public char[] EncryptLinq(string s) //not done yet, just for fun
         {
             var xx =  s.ToCharArray()
