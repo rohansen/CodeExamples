@@ -1,8 +1,11 @@
-﻿using RoomBooking.Models;
+﻿
+using RoomBooking.Exceptions;
+using RoomBooking.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -48,7 +51,9 @@ namespace RoomBooking.DbLayer
                     }
                     else
                     {
-                        throw new FaultException<Exception>(new Exception("Der er allerede en booking"));
+                        Trace.TraceInformation($"User {entity.UserId} tried to book something that was already booked");
+                        Trace.Flush();
+                        throw new FaultException<BookingExistsException>(new BookingExistsException("Booking exists at that time"));
                     }
                 }
                 scope.Complete();

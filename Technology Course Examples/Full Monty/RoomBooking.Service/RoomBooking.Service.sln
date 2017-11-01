@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomBooking.DbLayer", "Room
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomBooking.ServiceHost", "RoomBooking.ServiceHost\RoomBooking.ServiceHost.csproj", "{3E335C1B-DA37-44C2-8978-04B9C228BE16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomBooking.Exceptions", "RoomBooking.Exceptions\RoomBooking.Exceptions.csproj", "{D52A4498-31E2-442F-BC11-0EEEB6A9C135}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3E335C1B-DA37-44C2-8978-04B9C228BE16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E335C1B-DA37-44C2-8978-04B9C228BE16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E335C1B-DA37-44C2-8978-04B9C228BE16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D52A4498-31E2-442F-BC11-0EEEB6A9C135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D52A4498-31E2-442F-BC11-0EEEB6A9C135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D52A4498-31E2-442F-BC11-0EEEB6A9C135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D52A4498-31E2-442F-BC11-0EEEB6A9C135}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

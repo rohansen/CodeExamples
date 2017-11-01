@@ -12,6 +12,8 @@ namespace NugetTest.Models
         {
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<BlogPost> BlogPost { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
     }
 

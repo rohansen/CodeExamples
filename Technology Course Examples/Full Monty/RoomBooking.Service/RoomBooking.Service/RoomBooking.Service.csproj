@@ -57,6 +57,10 @@
       <Project>{1b350a69-a9de-4deb-9369-1dc1a207ab0a}</Project>
       <Name>RoomBooking.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RoomBooking.Exceptions\RoomBooking.Exceptions.csproj">
+      <Project>{D52A4498-31E2-442F-BC11-0EEEB6A9C135}</Project>
+      <Name>RoomBooking.Exceptions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RoomBooking.Models\RoomBooking.Models.csproj">
       <Project>{20fb80e0-a5e7-486a-8aba-dae6f6e8e772}</Project>
       <Name>RoomBooking.Models</Name>

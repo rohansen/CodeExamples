@@ -5,22 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NugetTest"
         mc:Ignorable="d"
-        Title="EF CRUD" Height="364.8" Width="538.6">
-    <Grid>
-        <Button x:Name="button" Content="Create" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.222,1.353" Click="button_Click"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="120" Margin="10,33,0,0"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="120" Margin="10,61,0,0"/>
-        <TextBox x:Name="txtSecQuestion" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Security Question" VerticalAlignment="Top" Width="120" Margin="10,89,0,0"/>
-        <Button x:Name="btnDelete" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="154,198,0,0" Click="btnDelete_Click"/>
-        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="154,174,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.222,1.353" Click="btnSearch_Click"/>
-        <TextBox x:Name="txtFoundEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="120" Margin="154,89,0,0"/>
-        <TextBox x:Name="txtFoundPassword" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="120" Margin="154,117,0,0"/>
-        <TextBox x:Name="txtFoundQuestion" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Security Question" VerticalAlignment="Top" Width="120" Margin="154,145,0,0"/>
-        <Label x:Name="label" Content="Create User" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="6.62,3.633" Margin="10,7,0,0"/>
-        <Label x:Name="label1" Content="Find User" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,7,0,0"/>
-        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Search string" VerticalAlignment="Top" Width="120" Margin="154,33,0,0"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="215,174,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.222,1.353" Click="btnUpdate_Click"/>
-        <TextBox x:Name="txtFoundId" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Id" VerticalAlignment="Top" Width="120" Margin="154,61,0,0"/>
+        Title="EF CRUD" Height="433.6" Width="1283.2">
+    <Grid HorizontalAlignment="Left" Width="1273" Height="395" VerticalAlignment="Top">
+        <ListBox x:Name="listBox" ItemsSource="{Binding}" Height="351" Margin="558,19,419,0" VerticalAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Email}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="listBox2" ItemsSource="{Binding Source=test}" Height="351" Margin="859,19,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Email}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <GroupBox x:Name="groupBox" Header="Create User" HorizontalAlignment="Left" Margin="10,10,0,0" Width="219" Height="209" VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Center" Margin="-2,0,-4.8,7.4" Width="214">
+                <TextBox x:Name="txtEmail" Height="23" TextWrapping="Wrap" Text="Email" Margin="5" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtSecQuestion" Height="23" TextWrapping="Wrap" Text="Security Question" VerticalAlignment="Top" Margin="5" HorizontalContentAlignment="Stretch"/>
+                <TextBox x:Name="txtPassword" Height="23" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Margin="5" HorizontalContentAlignment="Stretch"/>
+                <Button x:Name="button" Content="Create" HorizontalAlignment="Center" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+            </StackPanel>
+
+
+        </GroupBox>
+        <GroupBox x:Name="groupBox2" Header="Find User" HorizontalAlignment="Left" Margin="246,10,0,0" Width="307" Height="360" VerticalAlignment="Top">
+            <StackPanel Margin="0,0,0,0">
+                <TextBox Text="Searchstring" x:Name="txtSearch" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Margin="5" HorizontalContentAlignment="Stretch"/>
+                <TextBox x:Name="txtFoundId" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="{Binding ElementName=listBox,Mode=OneWay, Path=SelectedItem.Id}" VerticalAlignment="Top" Width="194" Margin="5" HorizontalContentAlignment="Stretch"/>
+                <TextBox x:Name="txtFoundEmail" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="{Binding ElementName=listBox, Mode=OneWay, Path=SelectedItem.Email}" VerticalAlignment="Top" Width="194" Margin="5" HorizontalContentAlignment="Stretch"/>
+                <TextBox x:Name="txtFoundPassword" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="{Binding ElementName=listBox,Mode=OneWay, Path=SelectedItem.Password}" VerticalAlignment="Top" Width="194" Margin="5" HorizontalContentAlignment="Stretch"/>
+                <TextBox x:Name="txtFoundQuestion" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="{Binding ElementName=listBox,Mode=OneWay, Path=SelectedItem.SecurityQuestion}" VerticalAlignment="Top" Width="194" Margin="5" HorizontalContentAlignment="Stretch"/>
+                <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="btnSearch_Click" Margin="10"/>
+                <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" Width="100" Click="btnUpdate_Click"/>
+                <Button x:Name="btnDelete" Content="Remove" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="btnDelete_Click" Margin="10"/>
+
+            </StackPanel>
+        </GroupBox>
 
     </Grid>
 </Window>
