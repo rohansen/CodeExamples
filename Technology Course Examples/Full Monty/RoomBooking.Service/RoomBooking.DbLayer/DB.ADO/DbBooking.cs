@@ -1,4 +1,5 @@
 ﻿
+using RoomBooking.DbLayer.Interfaces;
 using RoomBooking.Exceptions;
 using RoomBooking.Models;
 using System;
@@ -12,22 +13,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace RoomBooking.DbLayer
+namespace RoomBooking.DbLayer.DB.ADO
 {
 
     public class DbBooking : IDbCRUD<Booking>
     {
-
+        //Gets the connection string called "DefaultConnection" from the startup projects App.config
         private readonly string CONNECTION_STRING = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public void Create(Booking entity)
         {
-            TransactionOptions to = new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead };
+            //Set the options for the transaction scope to serializable, such that double bookings cannot occur
+            TransactionOptions to = new TransactionOptions { IsolationLevel = IsolationLevel.Serializable };
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, to))
             {
+                //Open connction using the connectionstring mentioned earlier
                 using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
+                    //amount of bookings is used to check how many bookings exist at the currently selected time
+                    //(hopefully 0)
                     int amountOfBookings;
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
@@ -37,7 +42,7 @@ namespace RoomBooking.DbLayer
                         cmd.Parameters.AddWithValue("endTime", entity.EndTime);
                         amountOfBookings = (int)cmd.ExecuteScalar();
                     }
-                    if (amountOfBookings == 0)
+                    if (amountOfBookings == 0)//There exists no bookings at the selected time, so we can go ahead and book
                     {
                         using (SqlCommand cmd = connection.CreateCommand())
                         {
@@ -51,8 +56,13 @@ namespace RoomBooking.DbLayer
                     }
                     else
                     {
+                        //A booking existed in the selected time period
+                        //We log this event (logging is setup in the startup projects app.config, under the element <Diagnostics>)
                         Trace.TraceInformation($"User {entity.UserId} tried to book something that was already booked");
                         Trace.Flush();
+                        //and we throw a FaultException(WCF Specific)
+                        //The <T> (type) of FaultException we throw, is one we have implemented ourselves (BookingExistsException).
+                        //You can find this exception in the projet RoomBooking.Exceptions
                         throw new FaultException<BookingExistsException>(new BookingExistsException("Booking exists at that time"));
                     }
                 }

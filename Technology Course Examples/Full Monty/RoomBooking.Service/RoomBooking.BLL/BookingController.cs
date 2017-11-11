@@ -1,4 +1,7 @@
 ﻿using RoomBooking.DbLayer;
+using RoomBooking.DbLayer.DB.ADO;
+using RoomBooking.DbLayer.DB.EntityFramework;
+using RoomBooking.DbLayer.Interfaces;
 using RoomBooking.Models;
 using System;
 using System.Collections.Generic;
@@ -12,9 +15,12 @@ namespace RoomBooking.BLL
     public class BookingController : IController<Booking>
     {
         private IDbCRUD<Booking> dbCrud;
+        //You can easily switch between ADO implementation and EF implementation because they share
+        //the same interface
         public BookingController()
         {
-            dbCrud = new DbBooking();
+           // dbCrud = new DbBooking();
+            dbCrud = new DbBookingEntityFramework();
         }
         public void Create(Booking entity)
         {
