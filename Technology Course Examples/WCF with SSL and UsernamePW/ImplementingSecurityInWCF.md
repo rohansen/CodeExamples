@@ -137,7 +137,8 @@ Example: netsh http add sslcert ipport=0.0.0.0:9977 certhash=DD5A370484E791A6018
 ```
 [(documentation)](https://msdn.microsoft.com/en-us/library/windows/desktop/cc307220(v=vs.85).aspx)
 
-## To host your service, go to the Program.cs file in your Console Hosting application, and host your service using the following code
+To host your service, go to the Program.cs file in your Console Hosting application, and host your service using the following code
+
 ```c#
 public class Program
 {
