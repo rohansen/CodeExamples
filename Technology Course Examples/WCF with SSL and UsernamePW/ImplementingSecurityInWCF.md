@@ -1,4 +1,4 @@
-# Securing WCF With X-509, User name / Password & Roles (On Windows)
+# Securing WCF With X-509 (On Windows)
 
 [![](https://github.com/favicon.ico)](https://github.com/rohansen/Code-Examples/tree/master/Technology%20Course%20Examples/WCF%20with%20SSL%20and%20UsernamePW)
 
@@ -138,4 +138,4 @@ Example: netsh http add sslcert ipport=0.0.0.0:9977 certhash=DD5A370484E791A6018
 [(documentation)](https://msdn.microsoft.com/en-us/library/windows/desktop/cc307220(v=vs.85).aspx)
 
 ## Run your Console Host application and add it as a service reference in your client to check if everything works!
-### This concludes the first part of the tutorial
+### This concludes the first part of the tutorial, you now have a simple service with a secure connection
