@@ -48,3 +48,25 @@ public class MyPasswordValidator : UserNamePasswordValidator
 }  
 ```
 ### Run the Service Host Application again, and update the service reference in your Service Client Project. Then run the client at notice what happens.
+
+You get an exception, because no credentials was passed with the service request.
+
+### To pass username and password from the client, to the server, open your Console Clients Program.cs, and code to provide these.
+```c#
+static void Main(string[] args)
+{
+    ServicePointManager.ServerCertificateValidationCallback = (obj, certificate, chain, errors) => true;
+    Service1Client cl = new Service1Client();
+    //The following two lines of code are used to pass credentials to the service
+    cl.ClientCredentials.UserName.UserName = "SuperStudent";
+    cl.ClientCredentials.UserName.Password = "1234";
+    var data =cl.GetData(123);
+    Console.WriteLine(data);
+    Console.ReadLine();
+}
+```
+
+### Test out your client once again.
+
+## This concludes part 2 of the WCF security tutorial
+
