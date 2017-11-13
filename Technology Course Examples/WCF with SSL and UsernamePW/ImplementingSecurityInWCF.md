@@ -137,5 +137,20 @@ Example: netsh http add sslcert ipport=0.0.0.0:9977 certhash=DD5A370484E791A6018
 ```
 [(documentation)](https://msdn.microsoft.com/en-us/library/windows/desktop/cc307220(v=vs.85).aspx)
 
+## To host your service, go to the Program.cs file in your Console Hosting application, and host your service using the following code
+```c#
+public class Program
+{
+    static void Main(string[] args)
+    {
+        using(ServiceHost host= new ServiceHost(typeof(Service1)))
+        {
+            host.Open();
+            Console.ReadLine();
+        }
+    }
+}
+```
+
 ## Run your Console Host application and add it as a service reference in your client to check if everything works!
 ### This concludes the first part of the tutorial, you now have a simple service with a secure connection
