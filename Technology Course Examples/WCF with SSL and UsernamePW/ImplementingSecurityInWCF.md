@@ -59,7 +59,7 @@ The next step is to configure the service it self, and the associated endpoint, 
         <serviceMetadata httpGetEnabled="False" httpsGetEnabled="True"/>
         <serviceDebug includeExceptionDetailInFaults="False" />
         <serviceCredentials>
-            <serviceCertificate x509FindType="FindByThumbprint" findValue="c9c9366de42f8dc2875b8139fb17f8aba9f5ba66" storeName="My" storeLocation="LocalMachine"/>
+            <serviceCertificate x509FindType="FindByThumbprint" findValue="DD5A370484E791A6018CDE67A23968C29B2590CB" storeName="My" storeLocation="LocalMachine"/>
         </serviceCredentials>
     </behavior>
 </serviceBehaviors>
@@ -68,3 +68,62 @@ The next step is to configure the service it self, and the associated endpoint, 
   ```xml
 <service name="ProjectName.Service1" behaviorConfiguration="SecureBehavior">
   ```
+  - Next up is finishing the configuration, by adding some extra binding configuration.
+  - Create a ```<bindings>``` tag in the root of ```<system.serviceModel>``` with the following contents:
+```xml
+<bindings>
+    <wsHttpBinding>
+        <binding name="SecureBindingHttps">
+            <security mode="Transport">
+                <transport clientCredentialType="None" />
+            </security>
+        </binding>
+    </wsHttpBinding>
+</bindings>
+```
+  - Go back to your ```<endpoint>``` and add the bindingConfiguration tag, so it points at your new configuration with the name  __"SecureBindingHttps"__. 
+  Code snippet:
+```xml
+  <endpoint address="SecureService" binding="wsHttpBinding" contract="ProjectName.IService1"  bindingConfiguration="SecureBindingHttps" >
+```
+ 
+ Your ```<system.serviceModel>``` should look something like this:
+ ```xml
+<system.serviceModel>
+  <services>
+    <service name="ProjectName.Service1" behaviorConfiguration="SecureBehavior">
+      <host>
+        <baseAddresses>
+          <add baseAddress = "https://localhost:9977" />
+        </baseAddresses>
+      </host>
+      <endpoint address="SecureService" binding="wsHttpBinding" contract="ProjectName.IService1"  bindingConfiguration="SecureBindingHttps" >
+        <identity>
+          <dns value="localhost"/>
+        </identity>
+      </endpoint>
+      <endpoint address="mex" binding="mexHttpsBinding" contract="IMetadataExchange"/>
+    </service>
+  </services>
+  <behaviors>
+    <serviceBehaviors>
+      <behavior name="SecureBehavior">
+        <serviceMetadata httpGetEnabled="false" httpsGetEnabled="True"/>
+        <serviceDebug includeExceptionDetailInFaults="False" />
+        <serviceCredentials>
+          <serviceCertificate x509FindType="FindByThumbprint" findValue="DD5A370484E791A6018CDE67A23968C29B2590CB" storeName="My" storeLocation="LocalMachine"/>
+        </serviceCredentials>
+      </behavior>
+    </serviceBehaviors>
+  </behaviors>
+  <bindings>
+    <wsHttpBinding>
+      <binding name="SecureBindingHttps">
+        <security mode="Transport">
+          <transport clientCredentialType="None" />
+        </security>
+      </binding>
+    </wsHttpBinding>
+  </bindings>
+</system.serviceModel>
+ ```
