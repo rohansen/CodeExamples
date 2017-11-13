@@ -134,7 +134,8 @@ The next step is to configure the service it self, and the associated endpoint, 
   - Type the appid of your Console Host application under the ```appid=xxx``` part of the command. You can find this in your Visual studio project in the Properties section of your project in the AssemblyInfo.cs file.[(screenshot)](https://i.imgur.com/xZwhA8L.png)
 ```
 Example: netsh http add sslcert ipport=0.0.0.0:9977 certhash=DD5A370484E791A6018CDE67A23968C29B2590CB appid='{f2c71a08-1f05-4bff-8c06-7f0e25177215}'
-```[(documentation)](https://msdn.microsoft.com/en-us/library/windows/desktop/cc307220(v=vs.85).aspx)
+```
+[(documentation)](https://msdn.microsoft.com/en-us/library/windows/desktop/cc307220(v=vs.85).aspx)
 
 ## Run your Console Host application and add it as a service reference in your client to check if everything works!
 ### This concludes the first part of the tutorial
