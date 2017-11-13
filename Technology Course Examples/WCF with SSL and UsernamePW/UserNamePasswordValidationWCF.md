@@ -68,5 +68,7 @@ static void Main(string[] args)
 
 ### Test out your client once again.
 
+### You now have username and password validation and an encrypted connection to your web service
+
 ## This concludes part 2 of the WCF security tutorial
 
