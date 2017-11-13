@@ -5,8 +5,9 @@
 ## Steps needed for implementation
 
 
-### To get our base workspace ready, create the following projects in Visual Studio
+
 # Create a WCF Library in Visual Studio
+### To get our base workspace ready, create the following projects in Visual Studio
   - A Windows Communication Foundation (WCF) Service Library ___(You could call it SecureService)___
   - A Console Application that can host your service ___(You could call it SecureServiceHost)___
   - A Console Application that can be the client of your service ___(You could call it SecureClient)___
