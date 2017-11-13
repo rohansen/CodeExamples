@@ -154,5 +154,23 @@ public class Program
 }
 ```
 
-## Run your Console Host application and add it as a service reference in your client to check if everything works!
+  - Run your Console Host application and add it a service reference in your client.
+  - Implement your client as follows:
+  - Note that the implementation only differs from what you have seen earlier, in the first line of code in the main method.
+  - This line of code disables the x-509 certificate validation. You have to do this because we are using a self signed certificate, and no certificate authority has signed our certificate. You should not do this in production; get a valid certificate [LetsEncrypt](https://letsencrypt.org/). 
+```c#
+public class Program
+{
+    static void Main(string[] args)
+    {
+        ServicePointManager.ServerCertificateValidationCallback = (obj, certificate, chain, errors) => true;
+        Service1Client cl = new Service1Client();
+        var data =cl.GetData(123);
+        Console.WriteLine(data);
+        Console.ReadLine();
+    }
+}
+
+```
+
 ### This concludes the first part of the tutorial, you now have a simple service with a secure connection
