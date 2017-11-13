@@ -126,4 +126,10 @@ The next step is to configure the service it self, and the associated endpoint, 
     </wsHttpBinding>
   </bindings>
 </system.serviceModel>
- ```
+```
+
+##Finally, you need to bind your X-509 certificate to the port you have specified in your ```<baseAddress>``` element.
+  - Type the port you have used in your binding in the ipport=0.0.0.0:xxxx part of the command
+  - Type the certificate thumbprint in the certhash=xxxx part of the command
+  - Type the appid of your Console Host application. You can find this in your Visual studio project in the Properties section of your project in the AssemblyInfo.cs file.[(screenshot)](https://i.imgur.com/xZwhA8L.png)
+```netsh http add sslcert ipport=0.0.0.0:9977 certhash=DD5A370484E791A6018CDE67A23968C29B2590CB appid='{f2c71a08-1f05-4bff-8c06-7f0e25177215}'``` [(documentation)](https://msdn.microsoft.com/en-us/library/windows/desktop/cc307220(v=vs.85).aspx)
