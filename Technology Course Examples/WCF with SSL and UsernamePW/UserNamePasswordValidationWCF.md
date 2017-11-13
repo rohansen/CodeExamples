@@ -6,7 +6,7 @@
   - This will enable you to use a Custom userNamePasswordValidator, that we are going to implement in a while.
   - The ```customUserNamePasswordValidatorType``` parameter, is referring to a class in your WCF Service project that handles the validation 
   - This class does not exist yet, but we are going to create it soon.
-  - The value of this parameter ```"ProjectName.CredentialValidator, ProjectName"``` is referring the the Fully Qualified Class Name and the service ProjectName(AssemblyName)
+  - The value of this parameter ```"ProjectName.MyPasswordValidator, ProjectName"``` is referring the the Fully Qualified Class Name and the service ProjectName(AssemblyName)
 
   - Find your <bindings> in your Console Hosting application, and add the ```<message clientCredentialType="UserName" />``` element
   - In your ```<security mode="Transport">```, change the mode to ```TransportWithMessageCredential```
