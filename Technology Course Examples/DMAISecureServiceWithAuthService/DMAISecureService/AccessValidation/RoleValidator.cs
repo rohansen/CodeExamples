@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -10,14 +11,15 @@ namespace DMAISecureService.AccessValidation
 {
     public class RoleValidator : ServiceAuthorizationManager
     {
+        private UserController userCtrl = new UserController();
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
             //Get the current pipeline user context
             var identity = operationContext.ServiceSecurityContext.PrimaryIdentity;
             //simulate that we get a user and all his roles from the database
-            bool? userFound = true;
-            string[] userRolesFound = new string[] { "Admin" };
-            if (userFound == null && userFound == false)
+            var userFound = userCtrl.GetUser(identity.Name);
+            string[] userRolesFound = userFound.Roles.Select(x=>x.Name).ToArray();
+            if (userFound == null)
             {
                 throw new Exception("User not found");
             }

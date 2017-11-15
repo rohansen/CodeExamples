@@ -10,15 +10,19 @@ namespace Controllers
 {
     public class UserController
     {
-        public DbUser DbUser { get; set; }
+        private DbUser dbUser;
         public UserController()
         {
-            DbUser = new DbUser();
+            dbUser = new DbUser();
         }
 
         public User GetUser(int id)
         {
-            return new User();
+            return dbUser.Get(id);
+        }
+        public User GetUser(string email)
+        {
+            return dbUser.Get(email);
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿@using SecureService.Clients.WebMVCClient.Helpers
+@{
+    ViewBag.Title = "MembersOnly";
+}
+
+<h2>MembersOnly</h2>
+@if (AuthHelper.IsLoggedIn())
+{
+    <h1>Welcome to the secure area!</h1>
+    <h2>The answer to life the universe and everything is 42!</h2>
+}
+else
+{
+    <h1>You dont seem to be logged in, i cannot give you anything!! </h1>
+}
