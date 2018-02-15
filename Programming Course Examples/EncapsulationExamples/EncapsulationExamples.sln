@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncapsulationConsole", "EncapsulationConsole\EncapsulationConsole.csproj", "{33591105-323C-48DE-B3BF-4459C89C4B15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoEncapsulation", "NoEncapsulation\NoEncapsulation.csproj", "{129A862C-8B9F-4EF9-A5C1-FF86420524B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encapsulation", "Encapsulation\Encapsulation.csproj", "{E1DBFDB5-4840-420B-989A-12667B74DBE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33591105-323C-48DE-B3BF-4459C89C4B15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33591105-323C-48DE-B3BF-4459C89C4B15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33591105-323C-48DE-B3BF-4459C89C4B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33591105-323C-48DE-B3BF-4459C89C4B15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{129A862C-8B9F-4EF9-A5C1-FF86420524B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129A862C-8B9F-4EF9-A5C1-FF86420524B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129A862C-8B9F-4EF9-A5C1-FF86420524B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129A862C-8B9F-4EF9-A5C1-FF86420524B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1DBFDB5-4840-420B-989A-12667B74DBE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1DBFDB5-4840-420B-989A-12667B74DBE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1DBFDB5-4840-420B-989A-12667B74DBE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1DBFDB5-4840-420B-989A-12667B74DBE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
