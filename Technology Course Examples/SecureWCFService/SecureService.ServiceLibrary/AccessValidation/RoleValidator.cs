@@ -17,8 +17,8 @@ namespace SecureService.ServiceLibrary.AccessValidation
             //Get the current pipeline user context
             var identity = operationContext.ServiceSecurityContext.PrimaryIdentity;
             //simulate that we get a user and all his roles from the database
-            var userFound = userCtrl.GetUser(identity.Name);
-            string[] userRolesFound = userFound.Roles.Select(x => x.Name).ToArray();
+            var userFound = userCtrl.Get(identity.Name);
+            string[] userRolesFound = userFound.Roles.Select(x => x.Title).ToArray();
             if (userFound == null)
             {
                 throw new Exception("User not found");

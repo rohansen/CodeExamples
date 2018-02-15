@@ -37,6 +37,7 @@ namespace SecureService.Clients.WebMVCClient.Controllers
             }
             else
             {
+                
                 AuthHelper.Login(lvm);
                 return RedirectToAction("MembersOnly");
             }

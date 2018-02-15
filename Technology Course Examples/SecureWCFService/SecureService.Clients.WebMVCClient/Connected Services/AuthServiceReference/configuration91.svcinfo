@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="bvBuBkh0YyrI1ZH1SN6nJPKts9o=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="9ls/5+rZDrwD8IhOkzMD2wmLDfk=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IAuthService">
       <properties>
@@ -245,10 +245,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WSHttpBinding_IAuthService" contract="AuthServiceReference.IAuthService" bindingType="wsHttpBinding" address="https://localhost:9978/SecureAuthService" bindingConfiguration="WSHttpBinding_IAuthService">
+    <endpoint name="WSHttpBinding_IAuthService" contract="AuthServiceReference.IAuthService" bindingType="wsHttpBinding" address="https://localhost:5678/SecureAuthService" bindingConfiguration="WSHttpBinding_IAuthService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://localhost:9978/SecureAuthService</serializedValue>
+          <serializedValue>https://localhost:5678/SecureAuthService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -330,10 +330,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IAuthService" contract="AuthServiceReference.IAuthService" bindingType="netTcpBinding" address="net.tcp://localhost:9979/SecureAuthServiceTCP" bindingConfiguration="NetTcpBinding_IAuthService">
+    <endpoint name="NetTcpBinding_IAuthService" contract="AuthServiceReference.IAuthService" bindingType="netTcpBinding" address="net.tcp://localhost:5679/SecureAuthServiceTCP" bindingConfiguration="NetTcpBinding_IAuthService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:9979/SecureAuthServiceTCP</serializedValue>
+          <serializedValue>net.tcp://localhost:5679/SecureAuthServiceTCP</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -372,7 +372,7 @@
           <serializedValue>System.ServiceModel.Configuration.DnsElement</serializedValue>
         </property>
         <property path="/identity/dns/value" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>SecureService</serializedValue>
+          <serializedValue>ROH</serializedValue>
         </property>
         <property path="/identity/rsa" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.RsaElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.RsaElement</serializedValue>

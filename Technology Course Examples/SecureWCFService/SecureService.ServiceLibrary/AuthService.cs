@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SecureService.Domain;
 
 namespace SecureService.ServiceLibrary
 {
@@ -12,8 +13,17 @@ namespace SecureService.ServiceLibrary
         private UserController userCtrl = new UserController();
         public bool Login(string username, string password)
         {
-            var user = userCtrl.GetUser(username);
-            return user.Email == username && user.Password == password;
+            var user = userCtrl.Login(username,password);
+            if(user == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public User LoginABC()
+        {
+            throw new NotImplementedException();
         }
     }
 }

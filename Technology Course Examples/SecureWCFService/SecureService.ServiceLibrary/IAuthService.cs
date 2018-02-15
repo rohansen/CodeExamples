@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using SecureService.Domain;
+using System.ServiceModel;
 
 namespace SecureService.ServiceLibrary
 {
@@ -7,5 +8,7 @@ namespace SecureService.ServiceLibrary
     {
         [OperationContract]
         bool Login(string username, string password);
+        [OperationContract]
+        User LoginABC();
     }
 }

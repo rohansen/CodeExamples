@@ -172,6 +172,12 @@
     <None Include="Connected Services\AuthServiceReference\item1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\AuthServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\AuthServiceReference\SecureService.Clients.WebMVCClient.AuthServiceReference.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\SecureUserServiceReference\item.disco" />
     <None Include="Connected Services\SecureUserServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\SecureUserServiceReference\configuration.svcinfo" />

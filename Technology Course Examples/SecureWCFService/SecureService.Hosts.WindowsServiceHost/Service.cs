@@ -14,6 +14,7 @@ namespace SecureService.Hosts.WindowsServiceHost
 {
 
     //To install service type installutil <exename>
+    //The project needs an installer beforehand.
     //to uninstall, append /u to the installutil
     //Easiest if you use VS Dev Console (admin rights)
     public class Service : ServiceBase

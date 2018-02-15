@@ -21,7 +21,7 @@ namespace SecureService.ServiceLibrary
         [PrincipalPermission(SecurityAction.Demand, Role = "Admin")]
         public string GetData(int value)
         {
-            var found = UserController.GetUser(1337);
+            var found = UserController.Get(1337);
             return string.Format("Pssst, the data you requested back was: {0}, hi {1}, you are allowed to know!", value, OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name);
         }
 

@@ -14,8 +14,8 @@ namespace SecureService.ServiceLibrary.AccessValidation
         private UserController userCtrl = new UserController();
         public override void Validate(string userName, string password)
         {
-            var foundUser = userCtrl.GetUser(userName);
-            if (foundUser != null && foundUser.Email == userName && foundUser.Password == password)
+            var foundUser = userCtrl.Login(userName,password);
+            if (foundUser!=null)
             {
                 //email pw are valid
             }

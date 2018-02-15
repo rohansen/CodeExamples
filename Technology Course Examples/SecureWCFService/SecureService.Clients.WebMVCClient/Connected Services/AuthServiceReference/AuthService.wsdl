@@ -130,8 +130,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="https://localhost:9978/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="https://localhost:9978/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://localhost:5678/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://localhost:5678/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://localhost:5678/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SecureService.Domain" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IAuthService_Login_InputMessage">
@@ -140,10 +141,20 @@
   <wsdl:message name="IAuthService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IAuthService_LoginABC_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginABC" />
+  </wsdl:message>
+  <wsdl:message name="IAuthService_LoginABC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginABCResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAuthService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthService/Login" message="tns:IAuthService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthService/LoginResponse" message="tns:IAuthService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginABC">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthService/LoginABC" message="tns:IAuthService_LoginABC_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthService/LoginABCResponse" message="tns:IAuthService_LoginABC_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IAuthService" type="tns:IAuthService">
@@ -151,6 +162,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Login">
       <soap12:operation soapAction="http://tempuri.org/IAuthService/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginABC">
+      <soap12:operation soapAction="http://tempuri.org/IAuthService/LoginABC" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -171,20 +191,29 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="LoginABC">
+      <soap12:operation soapAction="http://tempuri.org/IAuthService/LoginABC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="AuthService">
     <wsdl:port name="WSHttpBinding_IAuthService" binding="tns:WSHttpBinding_IAuthService">
-      <soap12:address location="https://localhost:9978/SecureAuthService" />
+      <soap12:address location="https://localhost:5678/SecureAuthService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>https://localhost:9978/SecureAuthService</wsa10:Address>
+        <wsa10:Address>https://localhost:5678/SecureAuthService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAuthService" binding="tns:NetTcpBinding_IAuthService">
-      <soap12:address location="net.tcp://localhost:9979/SecureAuthServiceTCP" />
+      <soap12:address location="net.tcp://localhost:5679/SecureAuthServiceTCP" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:9979/SecureAuthServiceTCP</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:5679/SecureAuthServiceTCP</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Dns>SecureService</Dns>
+          <Dns>ROH</Dns>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
