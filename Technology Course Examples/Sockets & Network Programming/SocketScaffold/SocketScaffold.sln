@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketScaffold", "SocketScaffold\SocketScaffold.csproj", "{12061057-39DB-414B-8BAC-8A07804875AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientScaffold", "ClientScaffold\ClientScaffold.csproj", "{48055D32-9FD9-4F61-90AA-11CF1C1E3FFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketScaffoldAsyncAwait", "SocketScaffoldAsyncAwait\SocketScaffoldAsyncAwait.csproj", "{4A284EEF-71F1-44A9-86D7-A39C6B406F75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12061057-39DB-414B-8BAC-8A07804875AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12061057-39DB-414B-8BAC-8A07804875AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12061057-39DB-414B-8BAC-8A07804875AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12061057-39DB-414B-8BAC-8A07804875AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48055D32-9FD9-4F61-90AA-11CF1C1E3FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48055D32-9FD9-4F61-90AA-11CF1C1E3FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48055D32-9FD9-4F61-90AA-11CF1C1E3FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48055D32-9FD9-4F61-90AA-11CF1C1E3FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A284EEF-71F1-44A9-86D7-A39C6B406F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A284EEF-71F1-44A9-86D7-A39C6B406F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A284EEF-71F1-44A9-86D7-A39C6B406F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A284EEF-71F1-44A9-86D7-A39C6B406F75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
