@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandlingDeadlocks", "HandlingDeadlocks\HandlingDeadlocks.csproj", "{59F94C4E-E5B6-4EFA-8FB0-7B33293A4492}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{9764FFA2-2E3B-45B3-99FA-8D6DBD7C1E87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{1BA2E468-915A-488A-99E7-1047FE2C0E59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{59F94C4E-E5B6-4EFA-8FB0-7B33293A4492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59F94C4E-E5B6-4EFA-8FB0-7B33293A4492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59F94C4E-E5B6-4EFA-8FB0-7B33293A4492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9764FFA2-2E3B-45B3-99FA-8D6DBD7C1E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9764FFA2-2E3B-45B3-99FA-8D6DBD7C1E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9764FFA2-2E3B-45B3-99FA-8D6DBD7C1E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9764FFA2-2E3B-45B3-99FA-8D6DBD7C1E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BA2E468-915A-488A-99E7-1047FE2C0E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA2E468-915A-488A-99E7-1047FE2C0E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA2E468-915A-488A-99E7-1047FE2C0E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA2E468-915A-488A-99E7-1047FE2C0E59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

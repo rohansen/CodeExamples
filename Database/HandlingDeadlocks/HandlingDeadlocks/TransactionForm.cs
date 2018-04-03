@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Core;
+using DataAccess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,15 +14,15 @@ using System.Windows.Forms;
 
 namespace HandlingDeadlocks
 {
-    public partial class Form1 : Form
+    public partial class TransactionForm : Form
     {
         //private DbUser dbUser = new DbUser();
-        private DbUserTransactions dbUser = new DbUserTransactions();
-        public Form1()
+        private DbUserWithTransactions dbUser = new DbUserWithTransactions();
+        public TransactionForm()
         {
             InitializeComponent();
+            //For simplicity i have disabled cross thread checking for the form;this is not best practice
             CheckForIllegalCrossThreadCalls = false;
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,8 +34,7 @@ namespace HandlingDeadlocks
                 lbUsers.Items.Add(item);
             }
         }
-
-
+        
         private void lbUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
             User selectedUser = (User)lbUsers.SelectedItem;
@@ -42,26 +44,27 @@ namespace HandlingDeadlocks
                 lbAccounts.Items.Add(item);
             }
             txtUserName.Text = selectedUser.Name;
-
         }
-
-
-
+        
         private void btnWithdraw500Click(object sender, EventArgs e)
         {
-
             Thread t = new Thread(WithdrawThread);
             t.IsBackground = true;
             t.Start(500M);
-
-
         }
 
         private void WithdrawThread(object obj)
         {
             Account selectedAccount = (Account)lbAccounts.SelectedItem;
+            try
+            {
+                dbUser.RetryingWithdraw(selectedAccount, Convert.ToDecimal(obj), UpdateStatusCallback);
+            }
+            catch (SqlException sqle)
+            {
 
-            dbUser.RetryingWithdraw(selectedAccount, Convert.ToDecimal(obj), UpdateStatusCallback);
+                MessageBox.Show("Fejl: " + sqle.Number);
+            }
             
 
         }
@@ -80,7 +83,7 @@ namespace HandlingDeadlocks
             t.Start(200M);
 
         }
-
+        
         private void lbAccounts_SelectedIndexChanged(object sender, EventArgs e)
         {
             Account selectedPet = (Account)lbAccounts.SelectedItem;
@@ -90,15 +93,15 @@ namespace HandlingDeadlocks
         {
             User selectedUser = (User)lbUsers.SelectedItem;
             selectedUser.Name = txtUserName.Text;
-            if (dbUser.UpdateUser(selectedUser,true))
+            if (dbUser.UpdateUser(selectedUser, true))
             {
                 txtStatus.AppendText("Updated username..." + Environment.NewLine);
             }
             else
             {
-              
-                var result = MessageBox.Show("Someone has changed data before last refresh!, do you want to overwrite?","Warning",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
-                if(result == DialogResult.Yes)
+
+                var result = MessageBox.Show("Someone has changed data before last refresh!, do you want to overwrite?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
                 {
                     dbUser.UpdateUser(selectedUser, false);
                 }

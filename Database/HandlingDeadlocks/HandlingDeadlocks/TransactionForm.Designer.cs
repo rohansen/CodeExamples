@@ -1,6 +1,6 @@
 ﻿namespace HandlingDeadlocks
 {
-    partial class Form1
+    partial class TransactionForm
     {
         /// <summary>
         /// Required designer variable.

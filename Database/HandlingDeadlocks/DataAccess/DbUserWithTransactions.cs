@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -7,10 +9,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace HandlingDeadlocks
+namespace DataAccess
 {
-    public class DbUserTransactions
+    public class DbUserWithTransactions
     {
+        private string CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MyConnectionString4"].ConnectionString;
+        /// <summary>
+        /// This method implements retrying of failed transactions
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="amount"></param>
+        /// <param name="callback"></param>
         public void RetryingWithdraw(Account p, decimal amount, Action<string> callback)
         {
             TransactionOptions options = new TransactionOptions();
@@ -21,12 +30,11 @@ namespace HandlingDeadlocks
             bool success = false;
             while (currentRetries >= 0 && !success)
             {
-               
                     using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
                     {
                     try
                     {
-                        using (SqlConnection conn = new SqlConnection(@"Data Source=.\SQLExpress;Initial Catalog=MyDeadlockedDb;Integrated Security=True"))
+                        using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
                         {   //Dispose will call Close()
                             conn.Open();
                             decimal currentBalance = decimal.MinValue;
@@ -80,31 +88,33 @@ namespace HandlingDeadlocks
 
             }
         }
-
         public void Withdraw(Account p, decimal amount, Action<string> callback)
         {
             TransactionOptions options = new TransactionOptions();
             //Which isolation level?
             options.IsolationLevel = IsolationLevel.RepeatableRead;
-            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
+            //Alternative to TransactionScope is connection.BeginTransaction()
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
-                using (SqlConnection conn = new SqlConnection(@"Data Source=.\SQLExpress;Initial Catalog=MyDeadlockedDb;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
                 {   //Dispose will call Close()
                     decimal currentBalance = decimal.MinValue;
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
+                        
                         conn.Open();
                         cmd.CommandText = "SELECT Balance FROM Account WHERE Id=@id";
                         cmd.Parameters.AddWithValue("id", p.Id);
                         currentBalance = (decimal)cmd.ExecuteScalar();
                         callback("Retrieved current balance as " + currentBalance);
+                        Thread.Sleep(2000);
                     }
 
                     if (currentBalance >= amount)
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
-                            Thread.Sleep(2000);
+                            
                             cmd.CommandText = "UPDATE [Account] SET Balance=Balance-@balance WHERE Id=@id";
                             cmd.Parameters.AddWithValue("id", p.Id);
                             cmd.Parameters.AddWithValue("balance", amount);
@@ -129,7 +139,7 @@ namespace HandlingDeadlocks
         public IEnumerable<User> GetAllUsersWithAccounts()
         {
             List<User> foundUsers = new List<User>();
-            using (SqlConnection conn = new SqlConnection(@"Data Source=.\SQLExpress;Initial Catalog=MyDeadlockedDb;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 conn.Open();
@@ -172,7 +182,7 @@ namespace HandlingDeadlocks
         public IEnumerable<Account> GetAllAccountsFromUser(int userId)
         {
             List<Account> foundAccounts = new List<Account>();
-            using (SqlConnection conn = new SqlConnection(@"Data Source=.\SQLExpress;Initial Catalog=MyDeadlockedDb;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 conn.Open();
@@ -195,7 +205,7 @@ namespace HandlingDeadlocks
         public bool UpdateUser(User u, bool concurrencyCheck)
         {
 
-            using (SqlConnection conn = new SqlConnection(@"Data Source=.\SQLExpress;Initial Catalog=MyDeadlockedDb;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 conn.Open();
@@ -216,7 +226,7 @@ namespace HandlingDeadlocks
                 cmd.Parameters.AddWithValue("id", u.Id);
                 cmd.Parameters.AddWithValue("name", u.Name);
                
-                int rowsChanged = (int)cmd.ExecuteNonQuery();
+                int rowsChanged = cmd.ExecuteNonQuery();
                 return rowsChanged == 1;
             }
         }
