@@ -170,7 +170,6 @@ namespace DataAccess
             }
             return foundUsers;
         }
-
         private void BuildAccount(User newUser, SqlDataReader rdr)
         {
             if (rdr.IsDBNull(rdr.GetOrdinal("UserId")))//If this column is null, the row contains no account info
@@ -178,7 +177,6 @@ namespace DataAccess
             newUser.Accounts.Add(new Account { Id = (int)rdr["Id"], Balance = Convert.ToDecimal(rdr["Balance"]), UserId = newUser.Id, User = newUser });
 
         }
-
         public IEnumerable<Account> GetAllAccountsFromUser(int userId)
         {
             List<Account> foundAccounts = new List<Account>();
