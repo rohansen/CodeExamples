@@ -4,14 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SecureService.Clients.WebMVCClient.Controllers
+namespace SecureService.Clients.WebMVCClientWithCookie.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            Session["asdadskj"] = "hej";
-            string hej = (string)Session["asdadskj"];
+            
             return View();
         }
 
@@ -21,7 +20,7 @@ namespace SecureService.Clients.WebMVCClient.Controllers
 
             return View();
         }
-
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -194,7 +194,6 @@ namespace DataAccess
             }
             return foundAccounts;
         }
-
         /// <summary>
         /// Returns false if there has been an optimistic concurrency error
         /// </summary>
