@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComputerVisionLogin.Properties
+namespace Microsoft_Face_API.Properties
 {
 
 

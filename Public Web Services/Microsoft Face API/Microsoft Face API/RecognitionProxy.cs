@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComputerVisionLogin
+namespace Microsoft_Face_API
 {
     public class FaceRectangle
     {

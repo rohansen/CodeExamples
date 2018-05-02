@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ComputerVisionLogin")]
+[assembly: AssemblyTitle("Microsoft Face API")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ComputerVisionLogin")]
+[assembly: AssemblyProduct("Microsoft Face API")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("77e2bb33-37c4-4461-8e00-d42d64fe12e2")]
+[assembly: Guid("19396c84-958e-4414-ba36-3b207c05ba54")]
 
 // Version information for an assembly consists of the following four values:
 //

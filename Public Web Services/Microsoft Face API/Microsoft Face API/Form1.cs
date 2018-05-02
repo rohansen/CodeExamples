@@ -1,17 +1,17 @@
 ﻿using Emgu.CV;
-using Emgu.CV.Structure;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ComputerVisionLogin
+namespace Microsoft_Face_API
 {
     public partial class Form1 : Form
     {
@@ -36,24 +36,6 @@ namespace ComputerVisionLogin
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            var imageBytes = ImageToByteArray(lastFrame.Bitmap);
-
-            RestRequest request = new RestRequest(Method.POST);
-            request.AddHeader("Ocp-Apim-Subscription-Key", API_KEY); // GET KEY FROM AZURE PORTAL - FACE API
-            request.AddHeader("Content-Type", "application/octet-stream");
-            request.AddParameter("application/octet-stream", imageBytes, ParameterType.RequestBody);
-            IRestResponse<List<FaceRecognitionRequest>> response = client.Execute<List<FaceRecognitionRequest>>(request);
-            var firstResponse = response.Data.FirstOrDefault();
-            PrintImageData(firstResponse);
-            if (firstResponse.faceAttributes.emotion.happiness > 0.8)
-            {
-                MessageBox.Show("You are logged in!!! HAPPYDAYS!, you look like a " + firstResponse.faceAttributes.age + " year old " + firstResponse.faceAttributes.gender);
-            }
-            else
-            {
-                MessageBox.Show("You need to be happier to log in");
-            }
-
 
         }
 
