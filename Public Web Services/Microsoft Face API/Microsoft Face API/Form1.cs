@@ -18,7 +18,7 @@ namespace Microsoft_Face_API
         private RestClient client;
         private Mat lastFrame = null;
         private VideoCapture cap = new VideoCapture();
-        private string API_KEY = "XXXXXXXXX";
+        private string API_KEY = "b1460ed9f0ef485290cd57083921fab9";
         public Form1()
         {
             InitializeComponent();

@@ -29,7 +29,6 @@ namespace SecureService.Clients.WebMVCClient.Controllers
             {
                 canLogIn = authsvc.Login(lvm.Email, lvm.Password);
             }
-
             if (!canLogIn)
             {
                 ViewBag.StatusMessage = "Could not login with the given credentials";
