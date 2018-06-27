@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleServicesOnSamePort", "MultipleServicesOnSamePort\MultipleServicesOnSamePort.csproj", "{8E4BD3C0-3929-4656-A58E-AB363CBC5208}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFHost", "WCFHost\WCFHost.csproj", "{65184859-0189-4969-8280-0383CDDB82FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp", "ClientApp\ClientApp.csproj", "{873E4E1E-DBAB-4BE6-8580-CE6418FB6A8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E4BD3C0-3929-4656-A58E-AB363CBC5208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4BD3C0-3929-4656-A58E-AB363CBC5208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4BD3C0-3929-4656-A58E-AB363CBC5208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4BD3C0-3929-4656-A58E-AB363CBC5208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65184859-0189-4969-8280-0383CDDB82FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65184859-0189-4969-8280-0383CDDB82FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65184859-0189-4969-8280-0383CDDB82FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65184859-0189-4969-8280-0383CDDB82FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{873E4E1E-DBAB-4BE6-8580-CE6418FB6A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{873E4E1E-DBAB-4BE6-8580-CE6418FB6A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{873E4E1E-DBAB-4BE6-8580-CE6418FB6A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{873E4E1E-DBAB-4BE6-8580-CE6418FB6A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

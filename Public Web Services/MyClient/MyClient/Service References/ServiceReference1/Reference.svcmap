@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1dfb91b6-9a6d-4152-a71d-628450a60065" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:7410" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:7411" Protocol="http" SourceId="2" />
+    <MetadataSource Address="http://localhost:7412" Protocol="http" SourceId="3" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item2.disco" MetadataType="Disco" ID="b9b5465e-dbea-4e3d-ba2b-c2aaa7b4a106" SourceId="1" SourceUrl="http://localhost:7410/?disco" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="956d7db6-daff-428a-a02c-6438bcec442b" SourceId="1" SourceUrl="http://localhost:7410/?xsd=xsd2" />
+    <MetadataFile FileName="SystemUserService.wsdl" MetadataType="Wsdl" ID="3f276fd6-1777-40dd-bc78-297b47cc600f" SourceId="1" SourceUrl="http://localhost:7410/?wsdl" />
+    <MetadataFile FileName="item41.xsd" MetadataType="Schema" ID="920c7bfb-317a-442b-9fb3-ffcd897e2b37" SourceId="1" SourceUrl="http://localhost:7410/?xsd=xsd0" />
+    <MetadataFile FileName="item42.xsd" MetadataType="Schema" ID="8f3896ec-311b-48bf-985e-5ede0ae8bbe2" SourceId="1" SourceUrl="http://localhost:7410/?xsd=xsd1" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="79dc4d58-74f0-48e3-a055-874c8ea8190a" SourceId="2" SourceUrl="http://localhost:7411/?xsd=xsd2" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="0fbdc3a0-415b-4ac2-9d41-ca3e6c99baf6" SourceId="2" SourceUrl="http://localhost:7411/?disco" />
+    <MetadataFile FileName="item31.xsd" MetadataType="Schema" ID="27d84581-ec46-4a77-a378-1090bba9589e" SourceId="2" SourceUrl="http://localhost:7411/?xsd=xsd1" />
+    <MetadataFile FileName="item32.xsd" MetadataType="Schema" ID="46e4f40c-06b5-4500-ac79-d002c5f578bf" SourceId="2" SourceUrl="http://localhost:7411/?xsd=xsd0" />
+    <MetadataFile FileName="AdventureService.wsdl" MetadataType="Wsdl" ID="6156b17e-1f92-43d9-b056-361304c94d8c" SourceId="2" SourceUrl="http://localhost:7411/?wsdl" />
+    <MetadataFile FileName="item33.xsd" MetadataType="Schema" ID="a9016109-8431-4454-ad5c-f370f6253d6f" SourceId="3" SourceUrl="http://localhost:7412/?xsd=xsd0" />
+    <MetadataFile FileName="item11.disco" MetadataType="Disco" ID="08b08477-755e-4a2e-b286-95b1f62d18e7" SourceId="3" SourceUrl="http://localhost:7412/?disco" />
+    <MetadataFile FileName="item34.xsd" MetadataType="Schema" ID="bb6ea25c-e81c-4935-bf25-39abf646e30a" SourceId="3" SourceUrl="http://localhost:7412/?xsd=xsd2" />
+    <MetadataFile FileName="item35.xsd" MetadataType="Schema" ID="abe85f85-2521-4ca5-9928-e9adb0561f19" SourceId="3" SourceUrl="http://localhost:7412/?xsd=xsd1" />
+    <MetadataFile FileName="CharacterService.wsdl" MetadataType="Wsdl" ID="ea93ec75-d964-48a8-b52c-759aef7350a6" SourceId="3" SourceUrl="http://localhost:7412/?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

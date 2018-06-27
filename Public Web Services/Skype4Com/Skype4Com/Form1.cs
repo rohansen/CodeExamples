@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SKYPE4COMLib;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Skype4Com
 {
@@ -21,23 +22,42 @@ namespace Skype4Com
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var app = new SKYPE4COMLib.Application();
-            SKYPE4COMLib.Call call = new Call();
-            SKYPE4COMLib.IClient cl = new Client();
+            SKYPE4COMLib.Skype skype = new Skype();
 
-            SKYPE4COMLib.Skype skype = new Skype(); //Så vidt jeg kan regne ud er skype objektet "indgangen" til størstedelen af funktionaliteten.
-            
             try
             {
                 skype.Attach();
                 var usr = skype.CurrentUser;
-                skype.PlaceCall("live:h_hvarregaard");//Indtast caller id her (mit login er eks. hansen.ronni
+                skype.CallStatus += Skype_CallStatus;
+
+                var currentCall = skype.PlaceCall("echo123");//Indtast caller id her (har indtastet skypes ekko service for test)
+                label1.Text = "Started: " + currentCall.Timestamp.ToString() + "";
+                label2.Text = "Ended: " + currentCall.Timestamp.ToString() + "";
+                Thread.Sleep(4000);
+
+                currentCall.Finish();
+                label2.Text = "Ended: " + DateTime.Now.ToString() + "";
+
+                label3.Text = "Duration: " + (DateTime.Now - currentCall.Timestamp).TotalSeconds;
+
             }
             catch (COMException come)
             {
-                
                 throw;
             }
+        }
+
+        private void Skype_CallStatus(Call pCall, TCallStatus Status)
+        {
+            if (Status == TCallStatus.clsRinging)
+            {
+                //Currently ringing (either calling ,or being called)
+            }
+            if (Status == TCallStatus.clsFinished)
+            {
+                //hung up
+            }
+            //osv
         }
     }
 }

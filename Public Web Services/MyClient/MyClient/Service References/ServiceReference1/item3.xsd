@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ServerRPG.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServerRPG.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Adventure">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Logbook" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfSystemUser" />
+      <xs:element minOccurs="0" name="Rumor" nillable="true" type="tns:Rumor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Adventure" nillable="true" type="tns:Adventure" />
+  <xs:complexType name="ArrayOfSystemUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SystemUser" nillable="true" type="tns:SystemUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSystemUser" nillable="true" type="tns:ArrayOfSystemUser" />
+  <xs:complexType name="SystemUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Adventures" nillable="true" type="tns:ArrayOfAdventure" />
+      <xs:element minOccurs="0" name="HashedPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsGameMaster" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SystemUser" nillable="true" type="tns:SystemUser" />
+  <xs:complexType name="ArrayOfAdventure">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Adventure" nillable="true" type="tns:Adventure" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAdventure" nillable="true" type="tns:ArrayOfAdventure" />
+  <xs:complexType name="Rumor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Rumor" nillable="true" type="tns:Rumor" />
+</xs:schema>
