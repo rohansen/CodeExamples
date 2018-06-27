@@ -116,10 +116,7 @@ namespace KeyExchangeHMACExamples
             var decryptedMessage = recieverCSP.Decrypt(encryptedMessage, false);
             Console.WriteLine(Encoding.ASCII.GetString(decryptedMessage));
 
-
-
-            //RSACng key = new RSACng(4096);
-            //ECDiffieHellman helleman = new ECDiffieHellmanCng();
+            
         }
         public static RSAParameters GetParametersFromXMLString(string xml)
         {
