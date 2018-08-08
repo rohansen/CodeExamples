@@ -15,8 +15,6 @@ namespace KeyExchangeHMACExamples
             //RSA();
             //ECDHE();
         }
-
-
         public static void CreateHMAC(string message, byte[] key)
         {
             //Create a HMAC object with a provided key
@@ -39,7 +37,6 @@ namespace KeyExchangeHMACExamples
             //Compare the newly computed HMAC with the one provided from the sender
             return hashToValidate == MACString;
         }
-
         //https://blogs.msdn.microsoft.com/shawnfa/2007/01/22/elliptic-curve-diffie-hellman/
         //https://security.stackexchange.com/questions/45963/diffie-hellman-key-exchange-in-plain-english
         public static void ECDHE()
@@ -67,7 +64,6 @@ namespace KeyExchangeHMACExamples
 
 
         }
-
         private static bool CheckIfKeysAreEqual(byte[] aliceKey, byte[] bobKey)
         {
             for (int i = 0; i < bobKey.Length; i++)
@@ -82,7 +78,6 @@ namespace KeyExchangeHMACExamples
             }
             return true;
         }
-
         //https://stackoverflow.com/questions/17128038/c-sharp-rsa-encryption-decryption-with-transmission/17137218
         //Note: RSA includes both encryption, message authentication (MAC) and key generation
         public static void RSA()
@@ -116,7 +111,6 @@ namespace KeyExchangeHMACExamples
             var decryptedMessage = recieverCSP.Decrypt(encryptedMessage, false);
             Console.WriteLine(Encoding.ASCII.GetString(decryptedMessage));
 
-            
         }
         public static RSAParameters GetParametersFromXMLString(string xml)
         {
@@ -127,7 +121,6 @@ namespace KeyExchangeHMACExamples
             //get the object back from the stream
             return (RSAParameters)xs.Deserialize(sr);
         }
-
         public static string GetKeyAsXMLString(RSAParameters parameters)
         {
             //we need some buffer
