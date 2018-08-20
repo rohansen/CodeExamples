@@ -14,8 +14,6 @@ namespace SecureService.ServiceLibrary
         [OperationContract]
         string GetData(int value);
 
-    
-
         // TODO: Add your service operations here
     }
 

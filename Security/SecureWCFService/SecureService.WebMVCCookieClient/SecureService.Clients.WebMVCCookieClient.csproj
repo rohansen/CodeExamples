@@ -124,9 +124,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Helpers\AuthorizationManager.cs" />
+    <Compile Include="Helpers\Interfaces\IAuthorizationManager.cs" />
+    <Compile Include="Helpers\Interfaces\ICookieSetup.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CookieSetup.cs" />
+    <Compile Include="Helpers\ServiceManager.cs" />
+    <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Models\Authorization\CustomPrincipal.cs" />
     <Compile Include="Models\Authorization\CustomPrincipalSerializeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

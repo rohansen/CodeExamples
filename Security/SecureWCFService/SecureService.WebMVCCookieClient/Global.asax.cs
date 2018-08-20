@@ -1,4 +1,6 @@
-﻿using SecureService.Clients.WebMVCClientWithCookie.Models.Authorization;
+﻿using SecureService.Clients.WebMVCClientWithCookie.Helpers;
+using SecureService.Clients.WebMVCClientWithCookie.Helpers.Interfaces;
+using SecureService.Clients.WebMVCClientWithCookie.Models.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,33 +13,24 @@ using System.Web.Security;
 
 namespace SecureService.Clients.WebMVCClientWithCookie
 {
-public class MvcApplication : System.Web.HttpApplication
-{
-    protected void Application_Start()
+    public class MvcApplication : System.Web.HttpApplication
     {
-        AreaRegistration.RegisterAllAreas();
-        FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-        RouteConfig.RegisterRoutes(RouteTable.Routes);
-        BundleConfig.RegisterBundles(BundleTable.Bundles);
-    }
-    protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
-    {
-        HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-
-        if (authCookie != null)
+        private ICookieSetup _cookieSetup = new CookieSetup();
+        protected void Application_Start()
         {
-            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
 
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-            CustomPrincipalSerializeModel serializeModel = serializer.Deserialize<CustomPrincipalSerializeModel>(authTicket.UserData);
-
-            CustomPrincipal newUser = new CustomPrincipal(authTicket.Name);
-            newUser.Id = serializeModel.Id;
-            newUser.FirstName = serializeModel.FirstName;
-            newUser.LastName = serializeModel.LastName;
-            HttpContext.Current.User = newUser;
+            if (authCookie != null)
+            {
+                HttpContext.Current.User = _cookieSetup.RetrieveUserFromCookie(authCookie);
+            }
         }
     }
-}
 }

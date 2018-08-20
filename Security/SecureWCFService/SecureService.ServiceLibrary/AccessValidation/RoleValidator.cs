@@ -1,4 +1,6 @@
 ﻿using SecureService.Controllers;
+using SecureService.DataAccess.ADO.SQLServer;
+using SecureService.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace SecureService.ServiceLibrary.AccessValidation
 {
     public class RoleValidator : ServiceAuthorizationManager
     {
-        private UserController userCtrl = new UserController();
+        private IAuthorizeUserController<User> userCtrl = new UserController(new ADOUser());
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
             //Get the current pipeline user context

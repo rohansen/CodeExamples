@@ -1,4 +1,5 @@
-﻿using SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference;
+﻿using SecureService.Clients.WebMVCClientWithCookie.Helpers;
+using SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference;
 using SecureService.Clients.WebMVCClientWithCookie.Models.Authorization;
 using SecureService.Clients.WebMVCClientWithCookie.SecureUserServiceReference;
 using System;
@@ -9,72 +10,44 @@ using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using SecureService.Clients.WebMVCClientWithCookie.Helpers.Interfaces;
 
 namespace SecureService.Clients.WebMVCClientWithCookie.Controllers
 {
     public class AuthorizationController : Controller
     {
+        //TODO: Install package to inject dependencies in the controller
+        private ICookieSetup _cookieSetup;
+        private IAuthorizationManager _authManager;
+        public AuthorizationController()
+        {
+            _cookieSetup = new CookieSetup();
+            _authManager = new AuthorizationManager();
+        }
         // GET: Authorization
         public ActionResult Login()
         {
             return View();
         }
+        
         [HttpPost]
         public ActionResult Login(string username, string password, string ReturnUrl)
         {
-            AuthServiceClient authClient = new AuthServiceClient("WSHttpBinding_IAuthService");
-            bool canLogIn = authClient.Login(username, password);
-            if (canLogIn)
+            if (_authManager.Login(username, password))
             {
-                CustomPrincipalSerializeModel serializeModel = new CustomPrincipalSerializeModel();
-                serializeModel.Id = 1;
-                serializeModel.FirstName = "roh";
-                serializeModel.LastName = "han";
-
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-                string userData = serializer.Serialize(serializeModel);
-
-                FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
-                            1,
-                            username,
-                            DateTime.Now,
-                            DateTime.Now.AddMinutes(15),
-                            false,
-                            userData);
-
-                string encTicket = FormsAuthentication.Encrypt(authTicket);
-                HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
-                Response.Cookies.Add(faCookie);
-
+                //TODO: Always validate urls to prevent unvalidated redirect and forwards vulnerability
                 if (!string.IsNullOrEmpty(ReturnUrl))
                 {
                     return Redirect(ReturnUrl);
                 }
-
-                Session["username"] = username;
-                Session["password"] = password; //Server memory has clear txt password!
-
-
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.ErrorMessage = "Could not log in, invalid credentials";
             return View();
         }
-
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
-            Session.Abandon();
-
-            // clear authentication cookie
-            HttpCookie cookie1 = new HttpCookie(FormsAuthentication.FormsCookieName, "");
-            cookie1.Expires = DateTime.Now.AddYears(-1);
-            Response.Cookies.Add(cookie1);
-            // clear session cookie (not necessary for your current problem but i would recommend you do it anyway)
-            SessionStateSection sessionStateSection = (SessionStateSection)WebConfigurationManager.GetSection("system.web/sessionState");
-            HttpCookie cookie2 = new HttpCookie(sessionStateSection.CookieName, "");
-            cookie2.Expires = DateTime.Now.AddYears(-1);
-            Response.Cookies.Add(cookie2);
+            _authManager.Logout();
             return RedirectToAction("Index", "Home");
         }
     }

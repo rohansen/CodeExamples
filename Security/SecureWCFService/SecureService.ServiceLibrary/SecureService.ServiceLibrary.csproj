@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -71,6 +72,10 @@
     <ProjectReference Include="..\SecureService.Controllers\SecureService.Controllers.csproj">
       <Project>{135170EF-FD5A-4D38-9009-8FF3B235999A}</Project>
       <Name>SecureService.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecureService.DataAccess\SecureService.DataAccess.csproj">
+      <Project>{8B9B5CAA-E584-40B7-8217-E9A747AB081D}</Project>
+      <Name>SecureService.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\SecureService.Domain\SecureService.Domain.csproj">
       <Project>{8F59504D-5DA4-46F5-983B-E9BABBFE920C}</Project>

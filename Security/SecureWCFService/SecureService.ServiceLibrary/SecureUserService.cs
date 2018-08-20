@@ -1,4 +1,6 @@
 ﻿using SecureService.Controllers;
+using SecureService.DataAccess.ADO.SQLServer;
+using SecureService.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,10 @@ namespace SecureService.ServiceLibrary
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class SecureUserService : ISecureUserService
     {
-        public UserController UserController { get; set; }
+        public IAuthorizeUserController<User> UserController { get; set; }
         public SecureUserService()
         {
-            UserController = new UserController();
+            UserController = new UserController(new ADOUser());
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Admin")]

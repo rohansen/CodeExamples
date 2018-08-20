@@ -1,14 +1,14 @@
-﻿using SecureService.Clients.WebMVCClient.AuthServiceReference;
-using SecureService.Clients.WebMVCClient.SecureUserServiceReference;
+﻿using SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference;
+using SecureService.Clients.WebMVCClientWithCookie.SecureUserServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
 
-namespace SecureService.Clients.WebMVCClient.Helpers
+namespace SecureService.Clients.WebMVCClientWithCookie.Helpers
 {
-    public static class ServiceHelper 
+    public static class ServiceManager 
     {
         public static SecureUserServiceClient GetServiceClientWithCredentials(string username, string password)
         {

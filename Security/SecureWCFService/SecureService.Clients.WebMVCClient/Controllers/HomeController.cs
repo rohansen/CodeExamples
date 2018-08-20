@@ -10,8 +10,7 @@ namespace SecureService.Clients.WebMVCClient.Controllers
     {
         public ActionResult Index()
         {
-            Session["asdadskj"] = "hej";
-            string hej = (string)Session["asdadskj"];
+         
             return View();
         }
 

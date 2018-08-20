@@ -7,6 +7,7 @@
 <h4>@ViewBag.StatusMessage</h4>
 @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     @Html.TextBoxFor(x=>x.Email, new { @class="form-control" }) 
     @Html.PasswordFor(x=>x.Password, new { @class = "form-control" })
     <button type="submit" class="btn btn-default">Login</button>

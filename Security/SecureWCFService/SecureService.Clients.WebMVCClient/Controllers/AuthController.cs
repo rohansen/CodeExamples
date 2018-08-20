@@ -22,6 +22,7 @@ namespace SecureService.Clients.WebMVCClient.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel lvm)
         {
             bool canLogIn = false;
@@ -48,8 +49,7 @@ namespace SecureService.Clients.WebMVCClient.Controllers
 
             AuthHelper.Logout();
             return RedirectToAction("Index");
-
-
+            
         }
         public ActionResult MembersOnly()
         {

@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ADO.SQLServer\DbUser.cs" />
+    <Compile Include="ADO.SQLServer\ADOUser.cs" />
+    <Compile Include="Cryptography\HashingManager.cs" />
+    <Compile Include="Dapper\DapperUser.cs" />
     <Compile Include="Interfaces\IDatabaseCrud.cs" />
+    <Compile Include="Interfaces\IDatabaseUserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,7 +57,6 @@
   <ItemGroup>
     <Folder Include="ADO.EntityFramework\" />
     <Folder Include="ADO.MongoDB\" />
-    <Folder Include="Dapper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,6 +11,7 @@ namespace SecureService.DataAccess.Interfaces
         void Add(T entity);
         void Remove(T entity);
         T Get(int id);
+        T Get(string q);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(string query);
 

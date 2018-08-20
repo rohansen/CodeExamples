@@ -1,4 +1,6 @@
 ﻿using SecureService.Controllers;
+using SecureService.DataAccess.ADO.SQLServer;
+using SecureService.Domain;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
@@ -11,7 +13,7 @@ namespace SecureService.ServiceLibrary.AccessValidation
 {
     public class CredentialValidator : UserNamePasswordValidator
     {
-        private UserController userCtrl = new UserController();
+        private IAuthorizeUserController<User> userCtrl = new UserController(new ADOUser());
         public override void Validate(string userName, string password)
         {
             var foundUser = userCtrl.Login(userName,password);

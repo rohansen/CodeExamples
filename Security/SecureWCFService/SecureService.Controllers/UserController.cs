@@ -1,5 +1,6 @@
 ﻿using SecureService.DataAccess;
 using SecureService.DataAccess.ADO.SQLServer;
+using SecureService.DataAccess.Interfaces;
 using SecureService.Domain;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace SecureService.Controllers
 {
-    public class UserController : IController<User>
+    //This is supposed to do some business logic
+    public class UserController : IAuthorizeUserController<User>
     {
-        private DbUser dbUser;
-        public UserController()
+        private IDatabaseUserLogin<User> dbUser;
+        public UserController(IDatabaseUserLogin<User> userData)
         {
-            dbUser = new DbUser();
+            dbUser = userData;
         }
 
         public void Add(User entity)
@@ -38,6 +40,7 @@ namespace SecureService.Controllers
         public User Login(string username, string password)
         {
             return dbUser.Login(username, password);
+            
         }
         public IEnumerable<User> GetAll()
         {

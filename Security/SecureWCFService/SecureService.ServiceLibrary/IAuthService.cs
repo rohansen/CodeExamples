@@ -8,7 +8,5 @@ namespace SecureService.ServiceLibrary
     {
         [OperationContract]
         bool Login(string username, string password);
-        [OperationContract]
-        User LoginABC();
     }
 }
