@@ -1,0 +1,13 @@
+﻿@model SignedMessages.Models.AssymetricKeyInformation
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">Public Key</p>
+    <p class="lead" sstyle="word-break: break-all; word-wrap: break-word;">@Model.PublicKey</p>
+    <p>Ask Ronni for money, he wants to give everyone a million dollars!</p>
+    <p>HMAC: @ViewBag.MAC</p>
+</div>
+
