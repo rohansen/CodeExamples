@@ -37,6 +37,7 @@
         }
         else
         {
+            <li>@Html.ActionLink("Register", "Create", "Authorization")</li>
             <li>@Html.ActionLink("Login", "Login", "Authorization")</li>
 
         }
@@ -45,6 +46,8 @@
         </div>
     </div>
     <div class="container body-content">
+        <h1>@ViewBag.Message</h1>
+        <h1>@ViewBag.ErrorMessage</h1>
         @RenderBody()
         <hr />
         <footer>

@@ -34,6 +34,9 @@ namespace SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.Role[] RolesField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SaltField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -92,6 +95,19 @@ namespace SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference {
                 if ((object.ReferenceEquals(this.RolesField, value) != true)) {
                     this.RolesField = value;
                     this.RaisePropertyChanged("Roles");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Salt {
+            get {
+                return this.SaltField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SaltField, value) != true)) {
+                    this.SaltField = value;
+                    this.RaisePropertyChanged("Salt");
                 }
             }
         }
@@ -193,11 +209,11 @@ namespace SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthService/Login", ReplyAction="http://tempuri.org/IAuthService/LoginResponse")]
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthService/LoginABC", ReplyAction="http://tempuri.org/IAuthService/LoginABCResponse")]
-        SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User LoginABC();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthService/AddUser", ReplyAction="http://tempuri.org/IAuthService/AddUserResponse")]
+        void AddUser(SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User user);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthService/LoginABC", ReplyAction="http://tempuri.org/IAuthService/LoginABCResponse")]
-        System.Threading.Tasks.Task<SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User> LoginABCAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthService/AddUser", ReplyAction="http://tempuri.org/IAuthService/AddUserResponse")]
+        System.Threading.Tasks.Task AddUserAsync(SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -235,12 +251,12 @@ namespace SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User LoginABC() {
-            return base.Channel.LoginABC();
+        public void AddUser(SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User user) {
+            base.Channel.AddUser(user);
         }
         
-        public System.Threading.Tasks.Task<SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User> LoginABCAsync() {
-            return base.Channel.LoginABCAsync();
+        public System.Threading.Tasks.Task AddUserAsync(SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference.User user) {
+            return base.Channel.AddUserAsync(user);
         }
     }
 }

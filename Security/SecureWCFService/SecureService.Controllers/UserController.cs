@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 namespace SecureService.Controllers
 {
     //This is supposed to do some business logic
+    //In this vertical example, not alot of validation is needed
+    //You could consider doing preemptive validation on business models, and save the roundtrip to the WCF service
     public class UserController : IAuthorizeUserController<User>
     {
         private IDatabaseUserLogin<User> dbUser;
@@ -21,7 +23,7 @@ namespace SecureService.Controllers
 
         public void Add(User entity)
         {
-            throw new NotImplementedException();
+            dbUser.Add(entity);
         }
 
         public IEnumerable<User> Find(string query)

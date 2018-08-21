@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureService.Clients.Conso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureService.DataAccess", "SecureService.DataAccess\SecureService.DataAccess.csproj", "{8B9B5CAA-E584-40B7-8217-E9A747AB081D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureService.Clients.WebMVCClient", "SecureService.Clients.WebMVCClient\SecureService.Clients.WebMVCClient.csproj", "{D421442F-AABC-4033-892C-04E1B272ABD2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureService.ServiceLibrary", "SecureService.ServiceLibrary\SecureService.ServiceLibrary.csproj", "{F6CAA2CC-0DE3-40DC-AA80-6962D71C9AFC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureService.Clients.WebMVCCookieClient", "SecureService.WebMVCCookieClient\SecureService.Clients.WebMVCCookieClient.csproj", "{67B6467A-3EFA-4A3B-9E1F-C6EA765BA70C}"
@@ -51,10 +49,6 @@ Global
 		{8B9B5CAA-E584-40B7-8217-E9A747AB081D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B9B5CAA-E584-40B7-8217-E9A747AB081D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B9B5CAA-E584-40B7-8217-E9A747AB081D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D421442F-AABC-4033-892C-04E1B272ABD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D421442F-AABC-4033-892C-04E1B272ABD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D421442F-AABC-4033-892C-04E1B272ABD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D421442F-AABC-4033-892C-04E1B272ABD2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F6CAA2CC-0DE3-40DC-AA80-6962D71C9AFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6CAA2CC-0DE3-40DC-AA80-6962D71C9AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6CAA2CC-0DE3-40DC-AA80-6962D71C9AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU

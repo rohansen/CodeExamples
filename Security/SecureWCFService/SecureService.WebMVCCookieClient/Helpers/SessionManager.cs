@@ -1,4 +1,5 @@
-﻿using SecureService.Clients.WebMVCClientWithCookie.Models.Authorization;
+﻿using SecureService.Clients.WebMVCClientWithCookie.Helpers.Interfaces;
+using SecureService.Clients.WebMVCClientWithCookie.Models.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,11 @@ using System.Web;
 
 namespace SecureService.Clients.WebMVCClientWithCookie.Helpers
 {
-    public static class SessionManager
+    public class SessionManager : ISessionManager
     {
-        private static string LoginSessionName = "LoggedInUser";
-        private static CustomPrincipalSerializeModel currentUser;
-        public static CustomPrincipalSerializeModel CurrentUser
+        private string LoginSessionName = "LoggedInUser";
+        private CustomPrincipalSerializeModel currentUser;
+        public CustomPrincipalSerializeModel CurrentUser
         {
             get
             {
@@ -22,15 +23,15 @@ namespace SecureService.Clients.WebMVCClientWithCookie.Helpers
             }
         }
         
-        public static bool IsLoggedIn()
+        public bool IsLoggedIn()
         {
             return HttpContext.Current.Session[LoginSessionName] != null;
         }
-        public static void SetLoggedInSession(CustomPrincipalSerializeModel lvm)
+        public void SetLoggedInSession(CustomPrincipalSerializeModel lvm)
         {
             HttpContext.Current.Session[LoginSessionName] = lvm;
         }
-        public static void ClearSession()
+        public void ClearSession()
         {
             System.Web.HttpContext.Current.Session.Abandon();
         }

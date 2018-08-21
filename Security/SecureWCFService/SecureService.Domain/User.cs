@@ -15,6 +15,7 @@ namespace SecureService.Domain
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Salt { get; set; }
         public List<Role> Roles { get; set; }
         
         //Careful here... if you change a mutable object already in the dictionary, it wont work (these values should not change though)

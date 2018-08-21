@@ -141,20 +141,20 @@
   <wsdl:message name="IAuthService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
-  <wsdl:message name="IAuthService_LoginABC_InputMessage">
-    <wsdl:part name="parameters" element="tns:LoginABC" />
+  <wsdl:message name="IAuthService_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
   </wsdl:message>
-  <wsdl:message name="IAuthService_LoginABC_OutputMessage">
-    <wsdl:part name="parameters" element="tns:LoginABCResponse" />
+  <wsdl:message name="IAuthService_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
   </wsdl:message>
   <wsdl:portType name="IAuthService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthService/Login" message="tns:IAuthService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthService/LoginResponse" message="tns:IAuthService_Login_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="LoginABC">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAuthService/LoginABC" message="tns:IAuthService_LoginABC_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAuthService/LoginABCResponse" message="tns:IAuthService_LoginABC_OutputMessage" />
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthService/AddUser" message="tns:IAuthService_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthService/AddUserResponse" message="tns:IAuthService_AddUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IAuthService" type="tns:IAuthService">
@@ -169,8 +169,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="LoginABC">
-      <soap12:operation soapAction="http://tempuri.org/IAuthService/LoginABC" style="document" />
+    <wsdl:operation name="AddUser">
+      <soap12:operation soapAction="http://tempuri.org/IAuthService/AddUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -191,8 +191,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="LoginABC">
-      <soap12:operation soapAction="http://tempuri.org/IAuthService/LoginABC" style="document" />
+    <wsdl:operation name="AddUser">
+      <soap12:operation soapAction="http://tempuri.org/IAuthService/AddUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

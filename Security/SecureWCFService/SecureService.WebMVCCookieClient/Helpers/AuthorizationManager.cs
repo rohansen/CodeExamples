@@ -11,25 +11,37 @@ namespace SecureService.Clients.WebMVCClientWithCookie.Helpers
     public class AuthorizationManager : IAuthorizationManager
     {
         private ICookieSetup _cookieSetup;
+        private ISessionManager _sessionManager;
+        private IServiceManager _serviceManager;
+        public AuthorizationManager(ICookieSetup cookieSetup, ISessionManager sessionManager, IServiceManager serviceManager)
+        {
+            _cookieSetup = cookieSetup;
+            _sessionManager = sessionManager;
+            _serviceManager = serviceManager;
+        }
+
         public bool Login(string username, string password)
         {
-            AuthServiceClient authClient = ServiceManager.GetAuthServiceClient();
-            if (authClient.Login(username, password))
+            using (AuthServiceClient authClient = _serviceManager.GetAuthServiceClient())
             {
-                var cookie = _cookieSetup.CreateEncryptedAuthenticationCookie("roh", "han"); //Cookie is encrypted using AES and transmitted to the client. Key is on server. Cannot realistically be decrypted. Password not transmitted in this case
-                System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
-                SessionManager.SetLoggedInSession(new CustomPrincipalSerializeModel { FirstName = "John", LastName = "Doe" });
-                return true;
+                if (authClient.Login(username, password))
+                {
+                    var cookie = _cookieSetup.CreateEncryptedAuthenticationCookie("roh", "han"); //Cookie is encrypted using AES(using machineKey and transmitted to the client. Key is on server. Cannot realistically be decrypted. Password not transmitted in this case
+                    System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+                    _sessionManager.SetLoggedInSession(new CustomPrincipalSerializeModel { FirstName = "John", LastName = "Doe" });
+                    return true;
 
-            }else
-            {
-                return false;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
         public void Logout()
         {
-            SessionManager.ClearSession();
+            _sessionManager.ClearSession();
             _cookieSetup.ClearAuthenticationCookie();
         }
     }

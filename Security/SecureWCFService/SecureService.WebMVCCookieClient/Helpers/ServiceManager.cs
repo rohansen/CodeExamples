@@ -1,4 +1,5 @@
 ﻿using SecureService.Clients.WebMVCClientWithCookie.AuthServiceReference;
+using SecureService.Clients.WebMVCClientWithCookie.Helpers.Interfaces;
 using SecureService.Clients.WebMVCClientWithCookie.SecureUserServiceReference;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Web;
 
 namespace SecureService.Clients.WebMVCClientWithCookie.Helpers
 {
-    public static class ServiceManager 
+    public class ServiceManager : IServiceManager
     {
-        public static SecureUserServiceClient GetServiceClientWithCredentials(string username, string password)
+        public SecureUserServiceClient GetServiceClientWithCredentials(string username, string password)
         {
             SecureUserServiceClient client = new SecureUserServiceClient("WSHttpBinding_ISecureUserService");
             client.ClientCredentials.UserName.UserName = username;
@@ -18,7 +19,7 @@ namespace SecureService.Clients.WebMVCClientWithCookie.Helpers
             return client;
         }
 
-        public static AuthServiceClient GetAuthServiceClient()
+        public AuthServiceClient GetAuthServiceClient()
         {
             return new AuthServiceClient("WSHttpBinding_IAuthService");
         }

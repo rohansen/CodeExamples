@@ -13,6 +13,12 @@ namespace SecureService.ServiceLibrary
     public class AuthService : IAuthService
     {
         private IAuthorizeUserController<User> userCtrl = new UserController(new ADOUser());
+
+        public void AddUser(User user)
+        {
+            userCtrl.Add(user);
+        }
+
         //When this method returns, the data is serialized as a SOAP message by the datacontractserializer, and sent to the client using the protocol 
         //specified in the bindings section og ABC
         //Idea.. look into performance on using fault exceptions instead of true/false/null values
@@ -28,6 +34,8 @@ namespace SecureService.ServiceLibrary
             return true;
 
         }
+
+
 
     }
 }

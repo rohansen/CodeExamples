@@ -1,9 +1,11 @@
-﻿using SecureService.Clients.WebMVCClientWithCookie.Helpers;
+﻿using SecureService.Clients.WebMVCClientWithCookie.DependencyInjection;
+using SecureService.Clients.WebMVCClientWithCookie.Helpers;
 using SecureService.Clients.WebMVCClientWithCookie.Helpers.Interfaces;
 using SecureService.Clients.WebMVCClientWithCookie.Models.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -19,9 +21,13 @@ namespace SecureService.Clients.WebMVCClientWithCookie
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            UnityBootstrapper.RegisterComponents();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ServicePointManager.ServerCertificateValidationCallback = (obj, certificate, chain, errors) => true;
+
         }
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {
