@@ -12,7 +12,86 @@ namespace FrequencyAndLoathing
         static byte[] readBuffer = new byte[4096];
         static void Main(string[] args)
         {
+            StringBuilder sb = LoadInTextData();
+            string encryptedText = Encrypt(sb.ToString().ToUpper(), 3); //string dec = Decrypt(encryptedText, 3);
 
+            var clearTextFrequencies = sb.ToString().ToUpper().Where(c => "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Contains(c)).GroupBy(c => c).Select(x => new FrequencyElement { Character = x.Key, Frequency = x.Count() }).OrderBy(x => x.Frequency).ToList();
+            var englishTextFrequencies = GetEnglishFrequencies();
+            var encryptedTextFrequencies = encryptedText.Where(c => "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Contains(c)).GroupBy(c => c).Select(x => new FrequencyElement { Character = x.Key, Frequency = x.Count() }).OrderBy(x => x.Frequency).ToList();//.OrderBy(x => x.Count());
+            
+            if (!englishTextFrequencies.SequenceEqual(clearTextFrequencies))
+            {
+                //Find all the characters where the frequency in the clearText doesnt match the english language frequency
+                List<FrequencyElement> notMatchingFrequencies = FindNotMatchingFrequencies(englishTextFrequencies, clearTextFrequencies); // Se på frekvenser der er tæt på hinanden, og ikke på cleartext frekvenserne.. de er jo ikke kendt!! o_o
+                //Save the indexes of these, so we can swap out possible combinations later
+                var notMatchingFrequencyIndexes = notMatchingFrequencies.Select(x => clearTextFrequencies.IndexOf(x)).ToList();
+                //Generate possible permutations of the not matching frequencies
+                var possiblePermutations = FindPermutations(notMatchingFrequencies);
+                //Get a small part of the text to visualize test faster
+                var partOfTheTextToTest = sb.ToString().Substring(0, 50);
+
+               
+                for (int i = 0; i < possiblePermutations.Count; i++)
+                {
+                    //for each permutation, swap out the not matching frequencies, with a letter in the current permutation
+                    for (int j = 0; j < possiblePermutations[i].Count; j++)
+                    {
+                        clearTextFrequencies[notMatchingFrequencyIndexes[j]] = possiblePermutations[i][j];
+                        //Test Permutation
+
+                    }
+                    //Test permutation
+                    for (int j = 0; j < partOfTheTextToTest.Count(); j++)
+                    {
+                        partOfTheTextToTest.Replace(encryptedTextFrequencies[i].Character, englishTextFrequencies[i].Character);
+                    }
+                }
+            }
+
+            PrintFrequenciesSideBySide(clearTextFrequencies, englishTextFrequencies, encryptedTextFrequencies);
+
+            StringBuilder sb2 = new StringBuilder(encryptedText);
+            for (int i = 0; i < encryptedTextFrequencies.Count(); i++)
+            {
+                sb2.Replace(encryptedTextFrequencies[i].Character, englishTextFrequencies[i].Character);
+            }
+        }
+
+        private static List<FrequencyElement> FindNotMatchingFrequencies(List<FrequencyElement> englishTextFrequencies, List<FrequencyElement> clearTextFrequencies)
+        {
+            List<FrequencyElement> clearTextCharsThatDoesntMatch = new List<FrequencyElement>();
+            for (int i = 0; i < englishTextFrequencies.Count; i++)
+            {
+                if (englishTextFrequencies[i].Character != clearTextFrequencies[i].Character)
+                {
+                    clearTextCharsThatDoesntMatch.Add(clearTextFrequencies[i]);
+                }
+            }
+            //Found some places where the frequencey doest match the english language frequencies
+            return clearTextCharsThatDoesntMatch;
+        }
+
+        private static List<List<FrequencyElement>> FindPermutations(List<FrequencyElement> notMatchingFrequencies)
+        {
+            
+            //Rotate positions of frequencies that doesnt match, to try and makes sense of part of the tet
+            List<List<FrequencyElement>> listOfPermutations = new List<List<FrequencyElement>>();
+            for (int i = 0; i < notMatchingFrequencies.Count; i++)
+            {
+                var newPermutation = new List<FrequencyElement>();
+                for (int j = 0; j < notMatchingFrequencies.Count; j++)
+                {
+                    newPermutation.Add(notMatchingFrequencies[(j+i)%(notMatchingFrequencies.Count)]);
+                    
+                }
+                listOfPermutations.Add(newPermutation);
+               // clearTextFrequencies[clearTextCharsThatDoesntMatch.IndexOf(clearTextFrequencies[i].Character)] = 
+            }
+            return listOfPermutations;
+        }
+
+        private static StringBuilder LoadInTextData()
+        {
             StringBuilder sb = new StringBuilder();
             using (FileStream fs = File.OpenRead("fear.txt"))
             {
@@ -28,27 +107,11 @@ namespace FrequencyAndLoathing
                     }
                 }
             }
-            string SSSS = sb.ToString();
-            string encryptedText = Encrypt(sb.ToString().ToUpper(), 3);
-            string dec = Decrypt(encryptedText, 3);
-            var clearTextFrequencies = SSSS.ToUpper().Where(c => "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Contains(c)).GroupBy(c => c).Select(x => new FrequencyElement { Character = x.Key, Frequency = x.Count() }).OrderBy(x => x.Frequency).ToList();
-            //Console.WriteLine(encryptedText);
-            //Console.WriteLine(dec);
 
-            var englishFrequencies = GetEnglishFrequencies();
-            var encFrequencies = encryptedText.Where(c => "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Contains(c)).GroupBy(c => c).Select(x=>new FrequencyElement { Character = x.Key, Frequency = x.Count() }).OrderBy(x=>x.Frequency).ToList();//.OrderBy(x => x.Count());
-            PrintSideBySide(clearTextFrequencies, englishFrequencies, encFrequencies);
-
-            StringBuilder sb2 = new StringBuilder(encryptedText);
-            for (int i = 0; i < encFrequencies.Count(); i++)
-            {
-                sb2.Replace(encFrequencies[i].Character, englishFrequencies[i].Character);
-            }
-
-            var asd = "";
+            return sb;
         }
 
-        private static void PrintSideBySide(List<FrequencyElement> clearTextFrequencies, List<FrequencyElement> englishFrequencies, List<FrequencyElement> encFrequencies)
+        private static void PrintFrequenciesSideBySide(List<FrequencyElement> clearTextFrequencies, List<FrequencyElement> englishFrequencies, List<FrequencyElement> encFrequencies)
         {
             for (int i = 0; i < clearTextFrequencies.Count; i++)
             {
