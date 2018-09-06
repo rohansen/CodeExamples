@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 //http://www.gutenberg.org/
 namespace FrequencyAndLoathing
 {
     class Program
     {//problem - dem der er tæt på hinanden forvirrer: ide.. swap dem der er tæt  på hinanden i frekvens for at finde mening i teksten
         static byte[] readBuffer = new byte[4096];
+     
         static void Main(string[] args)
         {
+            Test("asd", "asd");
+
+          
+
+
             StringBuilder sb = LoadInTextData();
             string encryptedText = Encrypt(sb.ToString().ToUpper(), 3); //string dec = Decrypt(encryptedText, 3);
 
             var clearTextFrequencies = sb.ToString().ToUpper().Where(c => "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Contains(c)).GroupBy(c => c).Select(x => new FrequencyElement { Character = x.Key, Frequency = x.Count() }).OrderBy(x => x.Frequency).ToList();
             var englishTextFrequencies = GetEnglishFrequencies();
             var encryptedTextFrequencies = encryptedText.Where(c => "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Contains(c)).GroupBy(c => c).Select(x => new FrequencyElement { Character = x.Key, Frequency = x.Count() }).OrderBy(x => x.Frequency).ToList();//.OrderBy(x => x.Count());
-            
+
             if (!englishTextFrequencies.SequenceEqual(clearTextFrequencies))
             {
                 //Find all the characters where the frequency in the clearText doesnt match the english language frequency
@@ -30,7 +35,7 @@ namespace FrequencyAndLoathing
                 //Get a small part of the text to visualize test faster
                 var partOfTheTextToTest = sb.ToString().Substring(0, 50);
 
-               
+
                 for (int i = 0; i < possiblePermutations.Count; i++)
                 {
                     //for each permutation, swap out the not matching frequencies, with a letter in the current permutation
@@ -73,7 +78,7 @@ namespace FrequencyAndLoathing
 
         private static List<List<FrequencyElement>> FindPermutations(List<FrequencyElement> notMatchingFrequencies)
         {
-            
+
             //Rotate positions of frequencies that doesnt match, to try and makes sense of part of the tet
             List<List<FrequencyElement>> listOfPermutations = new List<List<FrequencyElement>>();
             for (int i = 0; i < notMatchingFrequencies.Count; i++)
@@ -81,11 +86,11 @@ namespace FrequencyAndLoathing
                 var newPermutation = new List<FrequencyElement>();
                 for (int j = 0; j < notMatchingFrequencies.Count; j++)
                 {
-                    newPermutation.Add(notMatchingFrequencies[(j+i)%(notMatchingFrequencies.Count)]);
-                    
+                    newPermutation.Add(notMatchingFrequencies[(j + i) % (notMatchingFrequencies.Count)]);
+
                 }
                 listOfPermutations.Add(newPermutation);
-               // clearTextFrequencies[clearTextCharsThatDoesntMatch.IndexOf(clearTextFrequencies[i].Character)] = 
+                // clearTextFrequencies[clearTextCharsThatDoesntMatch.IndexOf(clearTextFrequencies[i].Character)] = 
             }
             return listOfPermutations;
         }
@@ -167,7 +172,7 @@ namespace FrequencyAndLoathing
 
         public static string Encrypt(string input, int key)
         {
-      
+
             StringBuilder builder = new StringBuilder();
             foreach (char ch in input)
                 builder.Append(cipher(ch, key));
@@ -179,5 +184,41 @@ namespace FrequencyAndLoathing
         {
             return Encrypt(input, 26 - key);
         }
+      
+        public static void Test(string str1, string str2)
+        {
+            int[,] matrix = new int[10, 10];
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if(j%2==0)
+                    {
+                        matrix[i, j] = 666;
+                    }
+                    else
+                    {
+                        matrix[i, j] = j;
+                    }
+                    
+                }
+            }
+            PrintMatrix(matrix);
+        }
+
+        private static void PrintMatrix(int[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    Console.Write(matrix[i,j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
     }
 }
+

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ConsoleInventorySystem
 {
@@ -73,35 +74,46 @@ namespace ConsoleInventorySystem
         public bool IsAlive { get; set; }
         public int Hitpoints { get; set; }
         public Inventory Inventory { get; private set; }
-        public Player(int hitPoints)
+        public readonly TextBox StatusTextBox;
+        public Player(int hitPoints, TextBox statusTextBox)
         {
             Inventory = new Inventory();
             Hitpoints = hitPoints;
             IsAlive = true;
+            StatusTextBox = statusTextBox;
         }
 
         public void TakeDamage(int amount)
         {
             Hitpoints -= amount;
-            Console.WriteLine($"You took {amount} damage ({Hitpoints} left)");
+            StatusTextBox.AppendText($"You took {amount} damage ({Hitpoints} left)");
+            if (Hitpoints <= 0)
+            {
+                Die();
+            }
         }
 
         public void Heal(int amount)
         {
+            if (!IsAlive)
+            {
+                StatusTextBox.AppendText("You cannot heal a dead person"); 
+                return;
+            }
             Hitpoints += amount;
-            Console.WriteLine($"You healed for {amount} hitpoints ({Hitpoints} left)");
+            StatusTextBox.AppendText($"You healed for {amount} hitpoints ({Hitpoints} left)");
         }
 
         public void Respawn()
         {
             IsAlive = true;
-            Console.WriteLine("You are alive again");
+            StatusTextBox.AppendText("You are alive again");
         }
 
         public void Die()
         {
             IsAlive = false;
-            Console.WriteLine("You are dead");
+            StatusTextBox.AppendText("You are dead");
         }
     }
     
@@ -122,6 +134,10 @@ namespace ConsoleInventorySystem
         {
             Title = title;
         }
+        public override string ToString()
+        {
+            return Title;
+        }
 
     }
     
@@ -136,23 +152,18 @@ namespace ConsoleInventorySystem
         public void Attack(IDamagable damagable)
         {
             
-            
             if(damagable is IPlayer)
             {
                 var player = damagable as IPlayer;
                 if (!player.IsAlive) return;
                 damagable.TakeDamage(Damage);
               
-                if (player.Hitpoints<=0)
-                {
-                    player.Die();
-                }
                 
             }
         }
     }
     
-    public class BroadSword : Weapon
+    public sealed class BroadSword : Weapon
     {
         public BroadSword(string title, int damage) : base(title, damage)
         {
@@ -170,7 +181,7 @@ namespace ConsoleInventorySystem
         public abstract void Consume(IHealable whoConsumesIt);
     }
     
-    public class Juice : Consumable
+    public sealed class Juice : Consumable
     {
         private int _restoresHitpointAmount;
         public Juice(string title, int restoredHitpointAmount) : base(title)
